@@ -99,7 +99,6 @@ export const fr: Contenu = {
         "Chef de projet. J’ai imaginé la solution, réparti le travail de l’équipe, réalisé les maquettes sous Figma et développé le front-end comme l’API Node.js / Express.",
       resultat:
         "Une plateforme livrée en temps limité, avec recherche géolocalisée par catégorie et niveau d’expérience, défendue devant le jury : besoin, démonstration, choix techniques. Premier prix.",
-      liens: [{ label: "Code sur GitHub", href: "https://github.com/godlumi111-hue/SkillMap" }],
       etude: {
         contexte:
           "À Abidjan, trouver un plombier, un électricien ou un développeur fiable passe surtout par le bouche-à-oreille. Pour le hackathon des 25 ans de la filière MIAGE, nous avions un temps limité pour proposer une solution utile et la défendre devant un jury.",

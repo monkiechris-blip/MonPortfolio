@@ -90,7 +90,6 @@ export const en: Contenu = {
         "Project lead. I designed the solution, split the work across the team, made the Figma mockups and built both the front end and the Node.js / Express API.",
       resultat:
         "A platform delivered under time pressure, with location-based search by category and experience level, defended in front of the jury: need, live demo, technical choices. First prize.",
-      liens: [{ label: "Code on GitHub", href: skillmapFr.liens![0].href }],
       etude: {
         contexte:
           "In Abidjan, finding a reliable plumber, electrician or developer mostly relies on word of mouth. For the MIAGE 25th anniversary hackathon, we had limited time to build a useful solution and defend it before a jury.",
