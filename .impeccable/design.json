@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T10:30:00Z",
+  "title": "Design System: Portfolio MONKIÉ",
+  "extensions": {
+    "colorMeta": {
+      "haze": { "role": "neutral", "displayName": "Haze Amber", "canonical": "#E5A32B", "tonalRamp": ["#FFD55A", "#FFC24A", "#E5A32B", "#C88A1E", "#9A6A12", "#6E4A0D"] },
+      "ink": { "role": "primary", "displayName": "Silhouette", "canonical": "#0B0B0B" },
+      "sun": { "role": "accent", "displayName": "Sun Amber", "canonical": "#FFC24A" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Section titles, name, project names; caps, extra-condensed." },
+      "label": { "displayName": "Label", "purpose": "Controls, row labels, dates." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Sun travel along the horizon (1100ms) and sunrise on load (1600ms)." },
+      { "name": "feedback", "value": "200ms colors", "purpose": "Hover/press on buttons and links." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px", "purpose": "Rail goes to 6 columns, nav links appear, ceiling mirror shows." },
+      { "name": "lg", "value": "1024px", "purpose": "Three-column hero, status rail, 5/7 project grid." }
+    ],
+    "rules": [
+      "One light: every color is a value of the same amber.",
+      "The sun is the only luminous moment; it appears doubled (floor and ceiling).",
+      "Square corners everywhere; circles belong to the sun."
+    ]
+  }
+}
