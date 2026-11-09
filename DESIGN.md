@@ -1,123 +1,142 @@
 ---
 name: Portfolio MONKIÉ
-description: Une salle unique sous un soleil d'ambre ; le parcours est la ligne d'horizon.
+description: Portfolio d'ingénieur logiciel, clair, sobre et précis.
 colors:
-  sun: "#FFC24A"
-  mirror: "#FFD55A"
-  haze: "#E5A32B"
-  deep: "#C88A1E"
-  dusk: "#9A6A12"
-  ground: "#6E4A0D"
-  ink: "#0B0B0B"
-  ink-soft: "#3D2905"
+  bg: "#FAFAF9"
+  surface: "#FFFFFF"
+  subtle: "#F5F5F4"
+  line: "#E7E5E4"
+  line-strong: "#D6D3D1"
+  ink: "#0C0C0E"
+  ink-2: "#44403C"
+  ink-3: "#6B6560"
+  accent: "#1E3A8A"
+  accent-hover: "#172E6E"
+  accent-soft: "#EEF2FB"
 typography:
   display:
-    fontFamily: "Archivo (wdth 62), ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(3.5rem, 9vw, 6rem)"
-    fontWeight: 900
-    lineHeight: 0.9
-    letterSpacing: "-0.01em"
-  statement:
-    fontFamily: "Archivo (wdth 62)"
-    fontSize: "clamp(1.6rem, 3.2vw, 2.4rem)"
-    fontWeight: 700
-    lineHeight: 0.95
-  label:
-    fontFamily: "Archivo (wdth 72)"
-    fontSize: "0.875rem"
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.5rem, 6vw, 4.25rem)"
     fontWeight: 600
-    lineHeight: 1.25
+    lineHeight: 1.02
+    letterSpacing: "-0.035em"
+  h2:
+    fontFamily: "Geist"
+    fontSize: "2.25rem"
+    fontWeight: 600
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
   body:
-    fontFamily: "Archivo (wdth 100)"
-    fontSize: "1.05rem"
+    fontFamily: "Geist"
+    fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.625
+  body-sm:
+    fontFamily: "Geist"
+    fontSize: "0.95rem"
+    fontWeight: 400
+    lineHeight: 1.625
+  caption:
+    fontFamily: "Geist"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.4
+  label:
+    fontFamily: "Geist"
+    fontSize: "0.875rem"
+    fontWeight: 500
+    lineHeight: 1.4
   meta:
-    fontFamily: "Archivo (wdth 100)"
+    fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "0.75rem"
-    fontWeight: 600
-    lineHeight: 1.33
+    fontWeight: 400
+    lineHeight: 1.4
 rounded:
-  none: "0px"
-  full: "9999px"
+  tag: "6px"
+  control: "10px"
+  card: "16px"
+  panel: "24px"
 spacing:
-  gutter-mobile: "24px"
-  gutter-desktop: "48px"
-  row: "20px"
-  section-mobile: "96px"
-  section-desktop: "128px"
+  gutter-mobile: "20px"
+  gutter-desktop: "32px"
+  container: "1152px"
+  section-mobile: "80px"
+  section-desktop: "112px"
 components:
   button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.mirror}"
-    rounded: "{rounded.none}"
-    height: "48px"
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.control}"
+    height: "44px"
     padding: "0 20px"
   button-primary-hover:
-    backgroundColor: "{colors.ground}"
+    backgroundColor: "{colors.accent-hover}"
   button-secondary:
-    backgroundColor: "transparent"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    height: "48px"
+    rounded: "{rounded.control}"
+    height: "44px"
     padding: "0 20px"
-  observation-tile:
-    backgroundColor: "{colors.haze}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "16px"
-  band-featured:
-    backgroundColor: "{colors.sun}"
-    textColor: "{colors.ink}"
-  band-dark:
-    backgroundColor: "{colors.ground}"
-    textColor: "{colors.mirror}"
+  card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.card}"
+    padding: "32px"
+  tag:
+    backgroundColor: "{colors.subtle}"
+    textColor: "{colors.ink-2}"
+    rounded: "{rounded.tag}"
+    padding: "4px 8px"
+  badge-award:
+    backgroundColor: "{colors.accent-soft}"
+    textColor: "{colors.accent}"
+    rounded: "9999px"
+    padding: "4px 12px"
+  contact-panel:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.panel}"
 ---
 
 # Design System: Portfolio MONKIÉ
 
 ## Overview
 
-Une seule salle, une seule lumière : un ambre monofréquence qui aplatit tout. Le premier écran est un hall dont la ligne d'horizon est le parcours (2021 → 2027). Un demi-soleil y est posé, reflété au sol et au plafond. Choisir une année fait glisser le soleil jusqu'à elle. Le reste de la page alterne des bandes de la même matière (haze, sun, deep, ground) séparées par des filets noirs. Le texte noir y joue le rôle des silhouettes.
+Le portfolio d'ingénieur logiciel, joué droit et soigné. Le fond est clair, le texte presque noir et un seul accent bleu nuit est utilisé avec parcimonie. La crédibilité vient de la structure (besoin, rôle, résultat), des faits réels et de la typographie, pas de la décoration. C'est un choix ferme de l'utilisateur : clair, sobre, professionnel, jamais de monde coloré pleine page.
 
 ## Colors
 
-- **Haze** `#E5A32B` : le sol de la page.
-- **Sun** `#FFC24A` : les bandes mises en avant (projet phare, « Cap »).
-- **Deep** `#C88A1E` : la bande Parcours et le haut du hall.
-- **Ground** `#6E4A0D` : la seule bande sombre (Distinctions), avec **mirror** `#FFD55A` comme encre.
-- **Ink** `#0B0B0B` : le texte, les filets et le bouton principal.
-- **Ink-soft** `#3D2905` : le texte secondaire, toujours teinté d'ambre (≥ 4,68:1 sur toutes les bandes claires).
-- Pas de gris et pas de seconde teinte : chaque couleur est une valeur de la même lumière.
+- Neutres chauds très légers (stone) : le fond `bg`, les surfaces blanches, les filets `line`.
+- Trois rôles de texte : `ink` (titres), `ink-2` (paragraphes), `ink-3` (méta, ≥ 5:1 sur `bg`).
+- L'accent bleu nuit `#1E3A8A` est réservé au bouton principal, aux liens de code, à la pastille « 1er prix » et aux points de statut.
+- Le seul aplat sombre de la page est le bloc contact final (`ink`).
 
 ## Typography
 
-Une seule famille, Archivo, pilotée par son axe de largeur. Les titres sont en capitales noires extra-condensées (wdth 62, 900, interlignage 0,9), avec un maximum de 6rem. Les libellés et les commandes sont en capitales condensées (wdth 72, 600). Le texte courant est en largeur normale, 400. Les chiffres des dates sont tabulaires.
+Geist pour tout, en graisses 400, 500 et 600. Les titres ont une approche resserrée (-0.025 à -0.035em) ; le texte de taille normale n'en a jamais. Geist Mono n'est utilisé que pour les dates et les étiquettes de stack. Tout est en casse de phrase : pas de capitales espacées.
 
 ## Layout
 
-Conteneur de 1500px maximum, gouttières de 24/48px. Les projets suivent une grille 5/12 – 7/12 : le nom à gauche, la structure apparente à droite (Le besoin / Mon rôle / Le résultat / Stack) en lignes séparées par des filets. Les sections ont 96px de marge verticale sur mobile et 128px sur desktop. Sur mobile, tout s'empile dans l'ordre de lecture et le rail de l'horizon passe à 3 colonnes.
+Conteneur de 1152px, gouttières de 20/32px. Le premier écran est partagé entre le texte à gauche et la carte d'identité à droite (23rem). Les projets suivent une hiérarchie : une carte phare pleine largeur, puis deux cartes, puis les projets en cours en pointillés. Le parcours a un titre fixe à gauche et une chronologie à droite. Les sections alternent les fonds `bg` et `surface`, séparées par un filet.
 
 ## Elevation & Depth
 
-Aucune ombre. La profondeur vient de la lumière : un dégradé vertical deep → haze dans le hall, le halo flou du soleil, et des tuiles d'observation en haze/70 avec un léger `backdrop-blur` par-dessus le soleil. Un grain de brume fixe est posé en `multiply` à 16 %.
+Presque plat. Seule la carte d'identité porte une ombre douce et neutre. Les cartes reposent sur des bordures de 1px. L'en-tête fixe a un léger `backdrop-blur` et ne prend sa bordure qu'après défilement.
 
 ## Shapes
 
-Des angles droits partout. Le cercle est réservé au soleil : le disque, la pastille « 1er prix » et les points du rail. Les filets font 1,5px en noir plein pour les structures et 1px en noir à 55 % pour les lignes de contenu.
+Rayons imbriqués : étiquettes 6px, contrôles 10px, cartes 16px, bloc contact 24px. Les cercles sont réservés au portrait et aux points de statut.
 
 ## Components
 
-- **Bouton principal** : fond encre, texte mirror, bord 1,5px, flèche en SVG.
-- **Bouton secondaire** : contour seul ; il se remplit de sun au survol.
-- **Tuile d'observation** : cadre 1,5px. Elle affiche l'arrêt sélectionné (`aria-live`).
-- **Rail de l'horizon** : six boutons `aria-pressed`, navigables aux flèches, Début et Fin. Le soleil se déplace par `transform`.
-- **Soleil** : un disque en dégradé radial, la moitié haute posée sur l'horizon. Son reflet au sol est strié, flouté et masqué ; son reflet au plafond est atténué à 45 %.
+- **Bouton principal** : fond accent, texte blanc, 44px de haut.
+- **Bouton secondaire** : surface blanche, bordure `line-strong`.
+- **Carte projet** : nom, sous-titre, puis la grille Besoin / Rôle / Résultat, la stack en étiquettes mono et les liens GitHub en accent.
+- **Chronologie** : un filet vertical, des points creux, la date en mono.
+- **Bloc contact** : fond `ink`, e-mail en grand, actions (e-mail en principal, puis WhatsApp, GitHub, CV).
 
 ## Do's and Don'ts
 
-- À faire : laisser le soleil être le seul moment lumineux de chaque bande.
-- À faire : garder le texte secondaire teinté d'ambre.
-- À faire : déplacer le soleil par `transform`, jamais par `left`.
-- À éviter : les ombres, les coins arrondis sur les commandes et les icônes en glyphes Unicode.
-- À éviter : un intitulé (kicker) au-dessus d'un titre, et une seconde couleur d'accent.
+- À faire : un seul accent, utilisé rarement ; des faits plutôt que des adjectifs.
+- À faire : nommer les transitions (`transition-colors`, `transition-transform`).
+- À éviter : les fonds colorés pleine page, les dégradés, les halos et les glyphes Unicode comme icônes.
+- À éviter : les intitulés (kickers) au-dessus des titres et les capitales espacées.

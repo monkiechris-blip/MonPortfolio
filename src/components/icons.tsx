@@ -1,43 +1,20 @@
+// Marques (GitHub, WhatsApp) : tracés officiels simplifiés, en aplat.
+// Les autres icônes viennent de lucide-react, trait 1,5.
+
 type IconProps = { className?: string };
 
-const base = {
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "square" as const,
-  "aria-hidden": true,
-  focusable: false,
-};
-
-export function ArrowRight({ className = "size-4" }: IconProps) {
+export function GitHubMark({ className = "size-4" }: IconProps) {
   return (
-    <svg viewBox="0 0 20 20" className={className} {...base}>
-      <path d="M3 10h13M11 5l5 5-5 5" />
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden focusable="false">
+      <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.97 3.22 9.18 7.69 10.67.56.1.77-.24.77-.54v-1.9c-3.13.68-3.79-1.51-3.79-1.51-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.64 1.22 3.28.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.16a10.7 10.7 0 0 1 5.64 0c2.15-1.46 3.1-1.16 3.1-1.16.61 1.55.23 2.7.11 2.98.72.79 1.16 1.8 1.16 3.03 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54a11.26 11.26 0 0 0 7.68-10.67C23.25 5.48 18.27.5 12 .5Z" />
     </svg>
   );
 }
 
-export function ArrowDown({ className = "size-4" }: IconProps) {
+export function WhatsAppMark({ className = "size-4" }: IconProps) {
   return (
-    <svg viewBox="0 0 20 20" className={className} {...base}>
-      <path d="M10 3v12M5 10l5 5 5-5M4 18h12" />
-    </svg>
-  );
-}
-
-export function ArrowUpRight({ className = "size-4" }: IconProps) {
-  return (
-    <svg viewBox="0 0 20 20" className={className} {...base}>
-      <path d="M6 14 15 5M7 5h8v8" />
-    </svg>
-  );
-}
-
-export function Sun({ className = "size-6" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} {...base}>
-      <circle cx="12" cy="12" r="4.5" fill="var(--sun)" />
-      <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden focusable="false">
+      <path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.21 8.21 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z" />
     </svg>
   );
 }

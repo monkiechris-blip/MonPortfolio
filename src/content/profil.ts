@@ -22,59 +22,16 @@ export const profil = {
 };
 
 export const etat = [
-  { label: "Basé à", valeur: "Abidjan" },
-  { label: "En cours", valeur: "Licence 3 MIAGE, UFHB × Rennes" },
-  { label: "Objectif", valeur: "Master génie logiciel & IA, 2027" },
-  { label: "Langues", valeur: "Français, anglais B1" },
+  { label: "Formation", valeur: "Licence 3 MIAGE, UFHB × Université de Rennes" },
+  { label: "Objectif", valeur: "Master génie logiciel & IA appliquée, rentrée 2027" },
+  { label: "Basé à", valeur: "Abidjan, Côte d’Ivoire" },
+  { label: "Langues", valeur: "Français, anglais (B1)" },
 ];
 
-export type Etape = {
-  annee: string;
-  titre: string;
-  lieu: string;
-  detail: string;
-  cible?: boolean;
-};
-
-// La ligne d’horizon du premier écran.
-export const horizon: Etape[] = [
-  {
-    annee: "2021",
-    titre: "EDF Côte d’Ivoire",
-    lieu: "Stage, département informatique",
-    detail: "Support utilisateurs N1/N2, maintenance des postes et du réseau.",
-  },
-  {
-    annee: "2023",
-    titre: "SMB",
-    lieu: "Stage, service technique",
-    detail: "Diagnostic des pannes, réparation et remise en service du parc.",
-  },
-  {
-    annee: "2024",
-    titre: "Entrée en MIAGE",
-    lieu: "Université Félix Houphouët-Boigny",
-    detail: "Bac C mention AB, puis major au concours d’entrée. Bourse intégrale au mérite.",
-  },
-  {
-    annee: "2025",
-    titre: "Major de promotion",
-    lieu: "Licence 1 MIAGE",
-    detail: "Première année validée avec la meilleure moyenne de la promotion.",
-  },
-  {
-    annee: "2026",
-    titre: "SkillMap & IMAKO",
-    lieu: "1er prix hackathon · stage développeur",
-    detail: "Premier prix au hackathon des 25 ans de la filière MIAGE avec SkillMap, puis une application de pointage conçue et livrée seul chez IMAKO.",
-  },
-  {
-    annee: "2027",
-    titre: "Master",
-    lieu: "Génie logiciel & IA appliquée",
-    detail: "Prochaine étape visée : un Master Informatique en France, dans la continuité du double diplôme avec Rennes.",
-    cible: true,
-  },
+export const preuves = [
+  { valeur: "1er prix", detail: "Hackathon des 25 ans MIAGE, 2026" },
+  { valeur: "Major", detail: "de promotion en Licence 1" },
+  { valeur: "IMAKO", detail: "Stage développeur, 2026" },
 ];
 
 export type Projet = {

@@ -1,14 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { profil } from "@/content/profil";
 import "./globals.css";
 
-const archivo = Archivo({
-  subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
-  display: "swap",
-});
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
@@ -48,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#E5A32B",
+  themeColor: "#FAFAF9",
 };
 
 const personne = {
@@ -70,7 +66,7 @@ const personne = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={archivo.variable}>
+    <html lang="fr" className={`${geist.variable} ${geistMono.variable}`}>
       <body>
         <script
           type="application/ld+json"

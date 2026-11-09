@@ -51,3 +51,7 @@ French only.
 ## Assets
 
 Portrait photo (from CV PDF). No project screenshots available.
+
+## Brand commitments
+
+- 2026-11-09 : the user rejected the bold amber "indoor sun" world as unprofessional and tiring. Standing preference: **light, sober, professional** — off-white ground, near-black text, one discreet navy accent, generous whitespace. Bar: the most polished software-engineer portfolios (Linear / Vercel / Stripe craft level). Never propose saturated full-page color worlds again.

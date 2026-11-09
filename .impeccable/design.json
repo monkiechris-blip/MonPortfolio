@@ -1,30 +1,85 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-09T10:30:00Z",
+  "generatedAt": "2026-11-09T12:00:00Z",
   "title": "Design System: Portfolio MONKIÉ",
   "extensions": {
     "colorMeta": {
-      "haze": { "role": "neutral", "displayName": "Haze Amber", "canonical": "#E5A32B", "tonalRamp": ["#FFD55A", "#FFC24A", "#E5A32B", "#C88A1E", "#9A6A12", "#6E4A0D"] },
-      "ink": { "role": "primary", "displayName": "Silhouette", "canonical": "#0B0B0B" },
-      "sun": { "role": "accent", "displayName": "Sun Amber", "canonical": "#FFC24A" }
+      "bg": {
+        "role": "neutral",
+        "displayName": "Stone 50",
+        "canonical": "#FAFAF9",
+        "tonalRamp": [
+          "#FFFFFF",
+          "#FAFAF9",
+          "#F5F5F4",
+          "#E7E5E4",
+          "#D6D3D1",
+          "#6B6560",
+          "#44403C",
+          "#0C0C0E"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Bleu nuit",
+        "canonical": "#1E3A8A",
+        "tonalRamp": [
+          "#EEF2FB",
+          "#1E3A8A",
+          "#172E6E"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Section titles, name, project names; caps, extra-condensed." },
-      "label": { "displayName": "Label", "purpose": "Controls, row labels, dates." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Nom dans le premier écran."
+      },
+      "meta": {
+        "displayName": "Mono",
+        "purpose": "Dates et étiquettes de stack uniquement."
+      }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "card-identity",
+        "value": "0 1px 2px rgb(12 12 14/.04), 0 8px 24px -12px rgb(12 12 14/.08)",
+        "purpose": "Carte d'identité du premier écran uniquement."
+      }
+    ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Sun travel along the horizon (1100ms) and sunrise on load (1600ms)." },
-      { "name": "feedback", "value": "200ms colors", "purpose": "Hover/press on buttons and links." }
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrée unique du premier écran (0,8s, décalage 80ms)."
+      },
+      {
+        "name": "feedback",
+        "value": "150ms colors",
+        "purpose": "Survol des boutons et liens."
+      }
     ],
     "breakpoints": [
-      { "name": "md", "value": "768px", "purpose": "Rail goes to 6 columns, nav links appear, ceiling mirror shows." },
-      { "name": "lg", "value": "1024px", "purpose": "Three-column hero, status rail, 5/7 project grid." }
+      {
+        "name": "sm",
+        "value": "640px",
+        "purpose": "Boutons côte à côte."
+      },
+      {
+        "name": "md",
+        "value": "768px",
+        "purpose": "Navigation complète."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "purpose": "Premier écran en deux colonnes, cartes projet par deux."
+      }
     ],
     "rules": [
-      "One light: every color is a value of the same amber.",
-      "The sun is the only luminous moment; it appears doubled (floor and ceiling).",
-      "Square corners everywhere; circles belong to the sun."
+      "Un seul accent bleu nuit, rare.",
+      "Clair et sobre : jamais de fond coloré pleine page.",
+      "Structure Besoin / Rôle / Résultat pour chaque projet."
     ]
   }
 }
