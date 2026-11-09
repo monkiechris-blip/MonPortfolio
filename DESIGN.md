@@ -1,33 +1,42 @@
 ---
 name: Portfolio MONKIÉ
-description: Portfolio d'ingénieur logiciel, clair, sobre et précis.
+description: Bento sombre et 3D au défilement ; le travail réel en panneaux vivants.
 colors:
-  bg: "#FAFAF9"
-  surface: "#FFFFFF"
-  subtle: "#F5F5F4"
-  line: "#E7E5E4"
-  line-strong: "#D6D3D1"
-  ink: "#0C0C0E"
-  ink-2: "#44403C"
-  ink-3: "#6B6560"
-  accent: "#1E3A8A"
-  accent-hover: "#172E6E"
-  accent-soft: "#EEF2FB"
+  bg: "#0B0D12"
+  tile: "#13161D"
+  tile-2: "#0F1218"
+  line: "#1F2430"
+  line-2: "#2A2F3A"
+  text: "#ECEEF2"
+  text-2: "#C3C8D2"
+  text-3: "#9AA1AF"
+  accent: "#FF8A3D"
+  accent-ink: "#13161D"
+  ci-green: "#009E60"
 typography:
   display:
-    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 6vw, 4.25rem)"
-    fontWeight: 600
-    lineHeight: 1.02
-    letterSpacing: "-0.035em"
+    fontFamily: "Bricolage Grotesque (wdth 80, opsz 96), Geist, sans-serif"
+    fontSize: "clamp(3.1rem, 6.4vw, 6.5rem)"
+    fontWeight: 700
+    lineHeight: 0.9
+    letterSpacing: "-0.02em"
   h2:
+    fontFamily: "Bricolage Grotesque"
+    fontSize: "clamp(2.75rem, 6vw, 5rem)"
+    fontWeight: 700
+    lineHeight: 0.95
+  card-title:
+    fontFamily: "Bricolage Grotesque"
+    fontSize: "2.5rem"
+    fontWeight: 700
+    lineHeight: 0.95
+  lead:
     fontFamily: "Geist"
-    fontSize: "2.25rem"
-    fontWeight: 600
-    lineHeight: 1.1
-    letterSpacing: "-0.025em"
+    fontSize: "1.25rem"
+    fontWeight: 400
+    lineHeight: 1.625
   body:
-    fontFamily: "Geist"
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.625
@@ -36,16 +45,26 @@ typography:
     fontSize: "0.95rem"
     fontWeight: 400
     lineHeight: 1.625
-  caption:
-    fontFamily: "Geist"
-    fontSize: "0.8125rem"
-    fontWeight: 400
-    lineHeight: 1.4
   label:
     fontFamily: "Geist"
     fontSize: "0.875rem"
     fontWeight: 500
     lineHeight: 1.4
+  caption:
+    fontFamily: "Geist"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.4
+  preview-xs:
+    fontFamily: "Geist"
+    fontSize: "0.7rem"
+    fontWeight: 400
+    lineHeight: 1.25
+  preview-xxs:
+    fontFamily: "Geist"
+    fontSize: "0.65rem"
+    fontWeight: 400
+    lineHeight: 1.25
   meta:
     fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "0.75rem"
@@ -53,90 +72,89 @@ typography:
     lineHeight: 1.4
 rounded:
   tag: "6px"
-  control: "10px"
-  card: "16px"
-  panel: "24px"
+  chip: "8px"
+  control: "12px"
+  inner: "16px"
+  tile: "22px"
+  finale: "28px"
 spacing:
-  gutter-mobile: "20px"
-  gutter-desktop: "32px"
-  container: "1152px"
-  section-mobile: "80px"
-  section-desktop: "112px"
+  gutter-mobile: "16px"
+  gutter-desktop: "56px"
+  container: "1400px"
+  grid-gap: "16px"
+  section-mobile: "64px"
+  section-desktop: "96px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
-    textColor: "{colors.surface}"
+    textColor: "{colors.accent-ink}"
     rounded: "{rounded.control}"
-    height: "44px"
+    height: "48px"
     padding: "0 20px"
-  button-primary-hover:
-    backgroundColor: "{colors.accent-hover}"
   button-secondary:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
+    backgroundColor: "transparent"
+    textColor: "{colors.text}"
     rounded: "{rounded.control}"
-    height: "44px"
+    height: "48px"
     padding: "0 20px"
-  card:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.card}"
-    padding: "32px"
+  tile:
+    backgroundColor: "{colors.tile}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.tile}"
+    padding: "28px"
   tag:
-    backgroundColor: "{colors.subtle}"
-    textColor: "{colors.ink-2}"
+    backgroundColor: "transparent"
+    textColor: "{colors.text-2}"
     rounded: "{rounded.tag}"
     padding: "4px 8px"
-  badge-award:
-    backgroundColor: "{colors.accent-soft}"
-    textColor: "{colors.accent}"
-    rounded: "9999px"
-    padding: "4px 12px"
-  contact-panel:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.surface}"
-    rounded: "{rounded.panel}"
+  contact-finale:
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.accent-ink}"
+    rounded: "{rounded.finale}"
+    padding: "64px"
 ---
 
 # Design System: Portfolio MONKIÉ
 
 ## Overview
 
-Le portfolio d'ingénieur logiciel, joué droit et soigné. Le fond est clair, le texte presque noir et un seul accent bleu nuit est utilisé avec parcimonie. La crédibilité vient de la structure (besoin, rôle, résultat), des faits réels et de la typographie, pas de la décoration. C'est un choix ferme de l'utilisateur : clair, sobre, professionnel, jamais de monde coloré pleine page.
+Un atelier d'ingénieur dans la nuit. Le travail réel apparaît en panneaux vivants (la recherche SkillMap qui se tape, la carte MedMap+, l'emploi du temps MyMIAGE), dessinés en code et signalés comme aperçus illustratifs. Au premier écran, le nom est au premier plan et les panneaux sont dispersés en 3D ; le défilement les assemble en bento. Ce choix vient de l'utilisateur, qui a refusé un ambre saturé (fatigant) et une page claire trop basique.
 
 ## Colors
 
-- Neutres chauds très légers (stone) : le fond `bg`, les surfaces blanches, les filets `line`.
-- Trois rôles de texte : `ink` (titres), `ink-2` (paragraphes), `ink-3` (méta, ≥ 5:1 sur `bg`).
-- L'accent bleu nuit `#1E3A8A` est réservé au bouton principal, aux liens de code, à la pastille « 1er prix » et aux points de statut.
-- Le seul aplat sombre de la page est le bloc contact final (`ink`).
+Un fond nuit, des tuiles légèrement plus claires et des filets de 1px. Trois rôles de texte : `text`, `text-2`, `text-3` (≥ 5,7:1 sur les tuiles). Un seul accent, l'orange de la Côte d'Ivoire `#FF8A3D`, utilisé pour le mot « fiable », le bouton principal, le badge du 1er prix, la carte de distinction phare et le bloc contact final. Le vert `ci-green` ne sert qu'à la signature tricolore et à un bloc de l'emploi du temps.
 
 ## Typography
 
-Geist pour tout, en graisses 400, 500 et 600. Les titres ont une approche resserrée (-0.025 à -0.035em) ; le texte de taille normale n'en a jamais. Geist Mono n'est utilisé que pour les dates et les étiquettes de stack. Tout est en casse de phrase : pas de capitales espacées.
+Bricolage Grotesque, resserrée (wdth 80), pour les titres et les noms de projets. Geist pour le texte courant, Geist Mono pour les dates et les étiquettes de stack. Tout est en casse de phrase, sans capitales espacées.
 
 ## Layout
 
-Conteneur de 1152px, gouttières de 20/32px. Le premier écran est partagé entre le texte à gauche et la carte d'identité à droite (23rem). Les projets suivent une hiérarchie : une carte phare pleine largeur, puis deux cartes, puis les projets en cours en pointillés. Le parcours a un titre fixe à gauche et une chronologie à droite. Les sections alternent les fonds `bg` et `surface`, séparées par un filet.
+Conteneur de 1400px. Le premier écran est une grille bento 3 colonnes × 2 rangées : la tuile slogan occupe les deux rangées ; à côté, SkillMap, le portrait, MedMap+ et Distinctions. Projets : SkillMap en pleine largeur (texte + fenêtre d'aperçu), puis deux tuiles, puis les projets en cours. Toutes les grilles utilisent `minmax(0,1fr)` pour qu'aucun texte ne déborde sur mobile.
 
 ## Elevation & Depth
 
-Presque plat. Seule la carte d'identité porte une ombre douce et neutre. Les cartes reposent sur des bordures de 1px. L'en-tête fixe a un léger `backdrop-blur` et ne prend sa bordure qu'après défilement.
+Pas d'ombres. La profondeur est spatiale :
+- assemblage 3D épinglé du premier écran (GSAP ScrollTrigger, `scrub: 1`, scène en perspective 1600px) ;
+- les panneaux suivants arrivent avec `rotationX`, puis se posent à plat ;
+- les petites tuiles s'inclinent au survol.
+
+Toute la 3D se désactive sous 1024px et avec `prefers-reduced-motion`.
 
 ## Shapes
 
-Rayons imbriqués : étiquettes 6px, contrôles 10px, cartes 16px, bloc contact 24px. Les cercles sont réservés au portrait et aux points de statut.
+Rayons imbriqués de 6, 12, 16, 22 et 28px. Les cercles sont réservés aux avatars, aux points de statut et aux repères de la carte.
 
 ## Components
 
-- **Bouton principal** : fond accent, texte blanc, 44px de haut.
-- **Bouton secondaire** : surface blanche, bordure `line-strong`.
-- **Carte projet** : nom, sous-titre, puis la grille Besoin / Rôle / Résultat, la stack en étiquettes mono et les liens GitHub en accent.
-- **Chronologie** : un filet vertical, des points creux, la date en mono.
-- **Bloc contact** : fond `ink`, e-mail en grand, actions (e-mail en principal, puis WhatsApp, GitHub, CV).
+- **Tuile** : fond `tile`, bordure `line`, rayon 22px ; la bordure s'éclaircit au survol.
+- **Aperçu SkillMap** : la requête se tape, puis les résultats s'affichent en décalé ; l'affichage est statique si l'utilisateur réduit les animations.
+- **Chronologie de parcours** : une tuile par expérience ; IMAKO a une bordure et des puces orange.
+- **Bloc contact final** : aplat orange, e-mail en grand, boutons sombres.
 
 ## Do's and Don'ts
 
-- À faire : un seul accent, utilisé rarement ; des faits plutôt que des adjectifs.
-- À faire : nommer les transitions (`transition-colors`, `transition-transform`).
-- À éviter : les fonds colorés pleine page, les dégradés, les halos et les glyphes Unicode comme icônes.
-- À éviter : les intitulés (kickers) au-dessus des titres et les capitales espacées.
+- À faire : faire porter la richesse par le contenu réel (aperçus, chiffres, faits), avec un seul accent.
+- À faire : animer avec `transform` et `opacity` uniquement, et toujours respecter la réduction des animations.
+- À éviter : les dégradés violets, les halos, les emoji, les glyphes Unicode comme icônes et les capitales espacées.
+- À éviter : un fond coloré sur toute la page ; l'orange reste un accent et un bloc final.

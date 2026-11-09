@@ -1,39 +1,33 @@
 import Image from "next/image";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Download,
-  Mail,
-  MapPin,
-  Phone,
-  Trophy,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Download, Mail, MapPin, Phone, Trophy } from "lucide-react";
+import { Effets3D } from "@/components/Effets3D";
 import { Header } from "@/components/Header";
 import { GitHubMark, WhatsAppMark } from "@/components/icons";
+import { Drapeau, MedMapPreview, MyMiagePreview } from "@/components/Previews";
+import { SkillMapPreview } from "@/components/SkillMapPreview";
 import {
   cap,
   competences,
   distinctions,
   enCours,
-  etat,
   experiences,
   formation,
-  preuves,
   profil,
   projets,
   type Projet,
 } from "@/content/profil";
 
-const cadre = "mx-auto w-full max-w-6xl px-5 sm:px-8";
+const cadre = "mx-auto w-full max-w-[1400px] px-4 sm:px-8 lg:px-14";
 const trait = { strokeWidth: 1.5, "aria-hidden": true } as const;
+const [skillmap, medmap, mymiage] = projets;
 
-function EnTete({ id, titre, intro }: { id: string; titre: string; intro?: string }) {
+function Titre({ id, children, intro }: { id: string; children: React.ReactNode; intro?: string }) {
   return (
-    <div className="max-w-2xl">
-      <h2 id={id} className="text-3xl font-semibold tracking-[-0.025em] sm:text-4xl">
-        {titre}
+    <div className="mb-10 grid gap-4 lg:mb-14 lg:grid-cols-[1fr_minmax(0,30rem)] lg:items-end">
+      <h2 id={id} className="display text-[clamp(2.75rem,6vw,5rem)] leading-[0.95]">
+        {children}
       </h2>
-      {intro && <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink-2">{intro}</p>}
+      {intro && <p className="text-[1.0625rem] leading-relaxed text-text-3 lg:pb-2">{intro}</p>}
     </div>
   );
 }
@@ -42,7 +36,7 @@ function Stack({ items }: { items: string[] }) {
   return (
     <ul className="flex flex-wrap gap-1.5" aria-label="Technologies">
       {items.map((s) => (
-        <li key={s} className="mono rounded-md border border-line bg-subtle px-2 py-1 text-xs text-ink-2">
+        <li key={s} className="mono rounded-md border border-line-2 px-2 py-1 text-xs text-text-2">
           {s}
         </li>
       ))}
@@ -60,7 +54,7 @@ function LiensCode({ p }: { p: Projet }) {
             href={l.href}
             target="_blank"
             rel="noopener"
-            className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover"
+            className="group inline-flex items-center gap-1.5 text-sm font-medium text-text hover:text-accent"
           >
             <GitHubMark className="size-4" />
             {l.label}
@@ -75,341 +69,388 @@ function LiensCode({ p }: { p: Projet }) {
   );
 }
 
+function Details({ p }: { p: Projet }) {
+  return (
+    <dl className="grid gap-5">
+      {(
+        [
+          ["Le besoin", p.besoin],
+          ["Mon rôle", p.role],
+          ["Le résultat", p.resultat],
+        ] as const
+      ).map(([t, d]) => (
+        <div key={t}>
+          <dt className="text-sm font-medium text-text">{t}</dt>
+          <dd className="mt-1.5 text-[0.95rem] leading-relaxed text-text-3">{d}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+const vague = (i: number) => ({ "--i": i }) as React.CSSProperties;
+
+/* ——— Premier écran : le bento ——— */
+
 function Hero() {
   return (
-    <section aria-labelledby="t-nom" className={`${cadre} pb-20 pt-14 sm:pt-20 lg:pb-28 lg:pt-24`}>
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-16">
-        <div className="rise">
-          <h1 id="t-nom" className="text-[clamp(2.5rem,6vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-            {profil.prenom} {profil.nom}
-          </h1>
-          <p className="mt-5 text-xl font-medium tracking-tight text-ink-2 sm:text-2xl">
-            Développeur full-stack. {profil.accroche}.
-          </p>
-          <p className="mt-5 max-w-[58ch] text-[1.0625rem] leading-relaxed text-ink-2">{profil.resume}</p>
-
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#projets"
-              className="group inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-[0.95rem] font-medium text-white transition-colors hover:bg-accent-hover"
-            >
-              Voir les projets
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" {...trait} />
-            </a>
-            <a
-              href={profil.cv}
-              download
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] border border-line-strong bg-surface px-5 text-[0.95rem] font-medium transition-colors hover:border-ink-3"
-            >
-              <Download className="size-4" {...trait} />
-              Télécharger le CV
-            </a>
-          </div>
-
-          <dl className="mt-14 grid grid-cols-3 gap-4 border-t border-line pt-6 sm:gap-8">
-            {preuves.map((p) => (
-              <div key={p.valeur}>
-                <dt className="text-lg font-semibold tracking-tight sm:text-xl">{p.valeur}</dt>
-                <dd className="mt-1 text-sm leading-snug text-ink-3">{p.detail}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        {/* Carte d'identité */}
-        <aside
-          aria-label="Profil"
-          className="rise-2 rounded-2xl border border-line bg-surface p-6 shadow-[0_1px_2px_rgb(12_12_14/0.04),0_8px_24px_-12px_rgb(12_12_14/0.08)]"
-        >
-          <div className="flex items-center gap-4">
-            <Image
-              src="/portrait.jpg"
-              alt={`Portrait de ${profil.prenom} ${profil.nom}`}
-              width={230}
-              height={290}
-              priority
-              className="size-16 rounded-full object-cover object-[50%_20%] ring-1 ring-line"
-            />
-            <div>
-              <p className="font-semibold tracking-tight">
-                {profil.prenom} {profil.nom}
-              </p>
-              <p className="mt-0.5 flex items-center gap-2 text-sm text-ink-3">
-                <span aria-hidden className="size-1.5 rounded-full bg-accent" />
-                Candidat Master, rentrée 2027
-              </p>
+    <section data-hero3d aria-labelledby="t-hero" className={`attente-3d ${cadre} pb-24 pt-2 lg:pb-32`}>
+      <div className="perspective-scene relative">
+      {/* Introduction 3D : le nom au premier plan, les tuiles dispersées derrière. */}
+      <div
+        data-hero-intro
+        aria-hidden
+        className="intro3d pointer-events-none absolute inset-0 z-10 flex-col items-center justify-center text-center"
+      >
+        <p className="display text-[clamp(5rem,12vw,11.5rem)] leading-[0.85]">
+          Chris-Orhé
+          <br />
+          <span className="text-accent">MONKIÉ</span>
+        </p>
+        <p className="mt-8 text-lg text-text-2">Développeur full-stack · Abidjan × Rennes</p>
+        <p className="mt-10 flex flex-col items-center gap-1 text-sm text-text-3">
+          Faites défiler
+          <ChevronDown className="size-4" {...trait} />
+        </p>
+      </div>
+      <div data-scene className="preserve-3d grid grid-cols-[minmax(0,1fr)] gap-3 sm:gap-4 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-[1.25fr_0.9fr_0.85fr] lg:grid-rows-[minmax(19rem,1fr)_minmax(17rem,1fr)]">
+        <div data-hero-tile className="tile rise flex flex-col justify-between gap-10 p-7 sm:p-10 lg:row-span-2" style={vague(0)}>
+          <div>
+            <h1 id="t-hero" className="display text-[clamp(3.1rem,6.4vw,6.5rem)] leading-[0.9]">
+              <span className="sr-only">
+                {profil.prenom} {profil.nom},{" "}
+              </span>
+              Du besoin réel au logiciel <span className="text-accent">fiable.</span>
+            </h1>
+            <p className="mt-7 max-w-[34ch] text-xl leading-relaxed text-text-2">
+              {profil.prenom} {profil.nom}, développeur full-stack en Licence 3 MIAGE. Je conçois des applications
+              web de bout en bout.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#projets"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-accent px-5 font-semibold text-accent-ink transition-colors hover:bg-[#FF9C59]"
+              >
+                Voir les projets
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" {...trait} />
+              </a>
+              <a
+                href={profil.cv}
+                download
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-line-2 px-5 font-medium transition-colors hover:border-text-3 hover:bg-tile-2"
+              >
+                <Download className="size-4" {...trait} />
+                Télécharger le CV
+              </a>
             </div>
           </div>
-
-          <dl className="mt-6 divide-y divide-line border-t border-line">
-            {etat.map((e) => (
-              <div key={e.label} className="grid grid-cols-[6.5rem_1fr] gap-3 py-3 text-sm">
-                <dt className="text-ink-3">{e.label}</dt>
-                <dd className="text-ink">{e.valeur}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <ul className="mt-2 grid grid-cols-3 gap-2 border-t border-line pt-5">
-            {[
-              { label: "E-mail", href: `mailto:${profil.email}`, icone: <Mail className="size-4" {...trait} /> },
-              { label: "WhatsApp", href: profil.whatsappLien, icone: <WhatsAppMark className="size-4" /> },
-              { label: "GitHub", href: profil.github, icone: <GitHubMark className="size-4" /> },
-            ].map((c) => (
-              <li key={c.label}>
-                <a
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel={c.href.startsWith("http") ? "noopener" : undefined}
-                  className="flex h-10 items-center justify-center gap-1.5 rounded-[10px] border border-line px-1 text-[0.8125rem] text-ink-2 sm:gap-2 sm:text-sm transition-colors hover:border-line-strong hover:bg-subtle hover:text-ink"
-                >
-                  {c.icone}
-                  {c.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function Projets() {
-  const [phare, ...autres] = projets;
-  const lignes = (p: Projet) =>
-    [
-      ["Le besoin", p.besoin],
-      ["Mon rôle", p.role],
-      ["Le résultat", p.resultat],
-    ] as const;
-
-  return (
-    <section id="projets" aria-labelledby="t-projets" className="border-t border-line py-20 sm:py-28">
-      <div className={cadre}>
-        <EnTete
-          id="t-projets"
-          titre="Projets"
-          intro="Trois plateformes livrées et deux projets en cours. Pour chacun : le besoin de départ, ce que j’ai fait, et ce qui en est sorti."
-        />
-
-        <article
-          id={phare.id}
-          aria-labelledby={`t-${phare.id}`}
-          className="mt-12 rounded-2xl border border-line bg-surface p-6 sm:p-10"
-        >
-          <p className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-sm font-medium text-accent">
-            <Trophy className="size-4" {...trait} />
-            {phare.prix} · {phare.cadre}
+          <p className="flex flex-wrap items-center gap-3 text-sm text-text-3">
+            <Drapeau />
+            Abidjan · double diplôme avec l’Université de Rennes
           </p>
-          <h3 id={`t-${phare.id}`} className="mt-5 text-3xl font-semibold tracking-[-0.025em] sm:text-4xl">
-            {phare.nom}
-          </h3>
-          <p className="mt-2 text-lg text-ink-2">{phare.sousTitre}</p>
-
-          <dl className="mt-8 grid gap-8 border-t border-line pt-8 md:grid-cols-3">
-            {lignes(phare).map(([t, d]) => (
-              <div key={t}>
-                <dt className="text-sm font-medium">{t}</dt>
-                <dd className="mt-2 text-[0.95rem] leading-relaxed text-ink-2">{d}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <div className="mt-8 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <Stack items={phare.stack} />
-            <LiensCode p={phare} />
-          </div>
-        </article>
-
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          {autres.map((p) => (
-            <article
-              key={p.id}
-              id={p.id}
-              aria-labelledby={`t-${p.id}`}
-              className="flex flex-col rounded-2xl border border-line bg-surface p-6 sm:p-8"
-            >
-              <p className="text-sm text-ink-3">{p.cadre}</p>
-              <h3 id={`t-${p.id}`} className="mt-2 text-2xl font-semibold tracking-[-0.02em]">
-                {p.nom}
-              </h3>
-              <p className="mt-1 text-ink-2">{p.sousTitre}</p>
-
-              <dl className="mt-6 flex-1 space-y-5 border-t border-line pt-6">
-                {lignes(p).map(([t, d]) => (
-                  <div key={t}>
-                    <dt className="text-sm font-medium">{t}</dt>
-                    <dd className="mt-1.5 text-[0.95rem] leading-relaxed text-ink-2">{d}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div className="mt-6 space-y-4 border-t border-line pt-5">
-                <Stack items={p.stack} />
-                <LiensCode p={p} />
-              </div>
-            </article>
-          ))}
         </div>
 
-        <h3 className="mt-16 text-lg font-semibold tracking-tight">En cours</h3>
-        <ul className="mt-4 grid gap-4 lg:grid-cols-2">
-          {enCours.map((e) => (
-            <li key={e.nom} className="rounded-2xl border border-dashed border-line-strong p-6">
-              <p className="flex items-center gap-2 font-medium">
-                <span aria-hidden className="size-1.5 rounded-full bg-accent" />
-                {e.nom}
-              </p>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-2">{e.detail}</p>
-            </li>
-          ))}
-        </ul>
+        <a data-hero-tile href={`#${skillmap.id}`} className="tile rise relative flex flex-col gap-4 p-6 sm:p-7" style={vague(1)}>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="display text-3xl">{skillmap.nom}</p>
+              <p className="text-sm text-text-3">{skillmap.sousTitre}</p>
+            </div>
+            <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-accent-ink">
+              1er prix 2026
+            </span>
+          </div>
+          <SkillMapPreview lignes={2} />
+        </a>
+
+        <div data-hero-tile className="tile rise relative min-h-[24rem] overflow-hidden lg:min-h-0" style={vague(2)}>
+          <Image
+            src="/portrait.jpg"
+            alt={`Portrait de ${profil.prenom} ${profil.nom}`}
+            fill
+            priority
+            sizes="(min-width: 1024px) 25vw, 100vw"
+            className="object-cover object-[50%_18%]"
+          />
+          <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/10 bg-bg/80 px-4 py-3 backdrop-blur-md">
+            <p className="font-semibold">Candidat Master 2027</p>
+            <p className="text-sm text-text-2">Génie logiciel & IA appliquée</p>
+          </div>
+        </div>
+
+        <a
+          data-hero-tile
+          href={`#${medmap.id}`}
+          className="tile rise relative min-h-[17rem] overflow-hidden p-6 sm:p-7"
+          style={vague(3)}
+        >
+          <MedMapPreview />
+          <div className="relative">
+            <p className="display text-3xl">{medmap.nom}</p>
+            <p className="text-sm text-text-2">Santé numérique · Abidjan</p>
+          </div>
+          <div className="absolute inset-x-4 bottom-4 rounded-xl border border-line-2 bg-bg/90 px-4 py-3">
+            <p className="text-sm font-semibold">Structure de santé la plus proche</p>
+            <p className="text-xs text-text-3">Carte Leaflet · assistant IA · paiement par séquestre</p>
+          </div>
+        </a>
+
+        <div data-hero-tile className="tile rise flex flex-col justify-between gap-6 p-6 sm:p-7" style={vague(4)}>
+          <p className="text-sm text-text-3">Distinctions</p>
+          <div>
+            <p className="display text-[clamp(3.5rem,5vw,4.5rem)] leading-none">Major</p>
+            <p className="mt-3 text-sm leading-relaxed text-text-2">
+              Au concours d’entrée MIAGE et en Licence 1. Bourse intégrale au mérite.
+            </p>
+          </div>
+        </div>
+      </div>
       </div>
     </section>
   );
 }
 
-function Chronologie({ items }: { items: { periode: string; titre: string; sous: string; contenu: React.ReactNode }[] }) {
+/* ——— Projets ——— */
+
+function Projets() {
+  const secondaires = [
+    {
+      p: medmap,
+      visuel: (
+        <div className="relative h-56 overflow-hidden rounded-2xl border border-line">
+          <MedMapPreview />
+          <div className="absolute inset-x-3 bottom-3 rounded-xl border border-line-2 bg-bg/90 px-3.5 py-2.5">
+            <p className="text-sm font-semibold">Centre de santé · 1,2 km</p>
+            <p className="text-xs text-text-3">Paiement bloqué jusqu’à confirmation du service</p>
+          </div>
+        </div>
+      ),
+    },
+    { p: mymiage, visuel: <MyMiagePreview /> },
+  ];
+
   return (
-    <ol className="relative border-l border-line">
-      {items.map((x) => (
-        <li key={x.titre} className="relative pb-10 pl-8 last:pb-0">
-          <span aria-hidden className="absolute -left-[5px] top-2 size-[9px] rounded-full border border-line-strong bg-surface" />
-          <p className="mono text-xs text-ink-3">{x.periode}</p>
-          <p className="mt-1.5 text-lg font-semibold tracking-tight">{x.titre}</p>
-          <p className="text-[0.95rem] text-ink-2">{x.sous}</p>
-          <div className="mt-3">{x.contenu}</div>
-        </li>
-      ))}
-    </ol>
+    <section id="projets" aria-labelledby="t-projets" className={`${cadre} py-16 lg:py-24`}>
+      <Titre
+        id="t-projets"
+        intro="Trois plateformes livrées et deux projets en cours. Pour chacun : le besoin de départ, ce que j’ai fait, ce qui en est sorti."
+      >
+        Projets
+      </Titre>
+
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:gap-4 lg:grid-cols-6">
+        <article
+          id={skillmap.id}
+          aria-labelledby="t-skillmap"
+          className="tile grid grid-cols-[minmax(0,1fr)] gap-10 p-6 sm:p-10 lg:col-span-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14"
+        >
+          <div className="flex flex-col">
+            <p className="inline-flex w-fit items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-[#FFB27A]">
+              <Trophy className="size-4" {...trait} />
+              {skillmap.prix} · {skillmap.cadre}
+            </p>
+            <h3 id="t-skillmap" className="display mt-6 text-[clamp(2.75rem,5vw,4rem)] leading-none">
+              {skillmap.nom}
+            </h3>
+            <p className="mt-2 text-lg text-text-2">{skillmap.sousTitre}</p>
+            <div className="mt-8 flex-1">
+              <Details p={skillmap} />
+            </div>
+            <div className="mt-8 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <Stack items={skillmap.stack} />
+              <LiensCode p={skillmap} />
+            </div>
+          </div>
+          <figure data-depth="fort" className="self-center rounded-2xl border border-line bg-tile-2 p-4 sm:p-6">
+            <div className="mb-4 flex items-center gap-1.5" aria-hidden>
+              <i className="size-2.5 rounded-full bg-line-2" />
+              <i className="size-2.5 rounded-full bg-line-2" />
+              <i className="size-2.5 rounded-full bg-line-2" />
+              <span className="mono ml-3 text-xs text-text-3">skillmap · recherche</span>
+            </div>
+            <p className="display mb-4 text-2xl" aria-hidden>
+              Trouver un prestataire
+            </p>
+            <SkillMapPreview lignes={3} grand />
+            <figcaption className="mt-4 text-xs text-text-3">Aperçu illustratif de l’interface de recherche.</figcaption>
+          </figure>
+        </article>
+
+        {secondaires.map(({ p, visuel }) => (
+          <article
+            key={p.id}
+            id={p.id}
+            aria-labelledby={`t-${p.id}`}
+            data-depth
+            className="tile flex flex-col p-6 sm:p-8 lg:col-span-3"
+          >
+            <figure>
+              {visuel}
+              <figcaption className="mt-3 text-xs text-text-3">Aperçu illustratif.</figcaption>
+            </figure>
+            <p className="mt-8 text-sm text-text-3">{p.cadre}</p>
+            <h3 id={`t-${p.id}`} className="display mt-1 text-4xl">
+              {p.nom}
+            </h3>
+            <p className="mt-1 text-text-2">{p.sousTitre}</p>
+            <div className="mt-6 flex-1 border-t border-line pt-6">
+              <Details p={p} />
+            </div>
+            <div className="mt-6 space-y-4 border-t border-line pt-5">
+              <Stack items={p.stack} />
+              <LiensCode p={p} />
+            </div>
+          </article>
+        ))}
+
+        {enCours.map((e) => (
+          <article key={e.nom} data-tilt className="tile p-6 sm:p-8 lg:col-span-3">
+            <p className="flex items-center gap-2 text-sm text-[#FFB27A]">
+              <span aria-hidden className="size-1.5 rounded-full bg-accent" />
+              En cours
+            </p>
+            <h3 className="display mt-3 text-3xl">{e.nom}</h3>
+            <p className="mt-3 text-[0.95rem] leading-relaxed text-text-3">{e.detail}</p>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
+
+/* ——— Parcours ——— */
 
 function Parcours() {
   return (
-    <section id="parcours" aria-labelledby="t-parcours" className="border-t border-line bg-surface py-20 sm:py-28">
-      <div className={`${cadre} grid gap-14 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-20`}>
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <EnTete
-            id="t-parcours"
-            titre="Parcours"
-            intro="Trois stages, du terrain au développement. La maintenance m’a appris comment un logiciel est installé, utilisé et dépanné ; IMAKO m’a confié un logiciel entier."
-          />
-        </div>
+    <section id="parcours" aria-labelledby="t-parcours" className={`${cadre} py-16 lg:py-24`}>
+      <Titre
+        id="t-parcours"
+        intro="Trois stages, du terrain au développement. La maintenance m’a appris comment un logiciel est installé, utilisé et dépanné ; IMAKO m’a confié un logiciel entier."
+      >
+        Parcours
+      </Titre>
 
-        <div>
-          <h3 className="text-sm font-medium text-ink-3">Expériences</h3>
-          <div className="mt-6">
-            <Chronologie
-              items={experiences.map((x) => ({
-                periode: x.periode,
-                titre: x.entreprise,
-                sous: x.poste,
-                contenu: (
-                  <>
-                    <p className="text-sm text-ink-3">{x.contexte}</p>
-                    <ul className="mt-3 space-y-2">
-                      {x.points.map((pt) => (
-                        <li key={pt} className="flex max-w-[62ch] gap-3 text-[0.95rem] leading-relaxed text-ink-2">
-                          <span aria-hidden className="mt-[0.7em] h-px w-2.5 shrink-0 bg-line-strong" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                ),
-              }))}
-            />
-          </div>
+      <ol className="grid gap-3 sm:gap-4 lg:grid-cols-3">
+        {experiences.map((x, k) => (
+          <li key={x.entreprise} data-depth className={`tile flex flex-col p-6 sm:p-8 ${k === 0 ? "!border-accent/40" : ""}`}>
+            <p className="mono text-xs text-text-3">{x.periode}</p>
+            <h3 className="display mt-3 text-3xl leading-tight">{x.entreprise}</h3>
+            <p className="mt-1 text-text-2">{x.poste}</p>
+            <p className="mt-1 text-sm text-text-3">{x.contexte}</p>
+            <ul className="mt-6 space-y-3 border-t border-line pt-6">
+              {x.points.map((pt) => (
+                <li key={pt} className="flex gap-3 text-[0.95rem] leading-relaxed text-text-3">
+                  <span
+                    aria-hidden
+                    className={`mt-[0.6em] size-1.5 shrink-0 rounded-full ${k === 0 ? "bg-accent" : "bg-line-2"}`}
+                  />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
 
-          <h3 className="mt-16 text-sm font-medium text-ink-3">Formation</h3>
-          <div className="mt-6">
-            <Chronologie
-              items={formation.map((f) => ({
-                periode: f.periode,
-                titre: f.titre,
-                sous: f.lieu,
-                contenu: <p className="max-w-[62ch] text-[0.95rem] leading-relaxed text-ink-2">{f.detail}</p>,
-              }))}
-            />
-          </div>
-        </div>
-      </div>
+      <h3 className="mt-16 text-sm text-text-3">Formation</h3>
+      <ol className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-[2fr_1fr]">
+        {formation.map((f) => (
+          <li key={f.titre} className="tile p-6 sm:p-8">
+            <p className="mono text-xs text-text-3">{f.periode}</p>
+            <p className="display mt-3 text-3xl leading-tight">{f.titre}</p>
+            <p className="mt-1 text-text-2">{f.lieu}</p>
+            <p className="mt-4 max-w-[62ch] text-[0.95rem] leading-relaxed text-text-3">{f.detail}</p>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
 
+/* ——— Distinctions et compétences ——— */
+
 function Distinctions() {
   return (
-    <section aria-labelledby="t-distinctions" className="border-t border-line py-20 sm:py-24">
-      <div className={cadre}>
-        <EnTete id="t-distinctions" titre="Distinctions" />
-        <ul className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {distinctions.map((d) => (
-            <li key={d.titre} className="bg-surface p-6">
-              <p className="text-xl font-semibold tracking-tight">{d.titre}</p>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-2">{d.detail}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <section aria-labelledby="t-distinctions" className={`${cadre} py-16 lg:py-24`}>
+      <Titre id="t-distinctions">Distinctions</Titre>
+      <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+        {distinctions.map((d, k) => (
+          <li
+            key={d.titre}
+            data-tilt
+            className={`flex min-h-48 flex-col justify-between rounded-[22px] border p-6 sm:p-7 ${
+              k === 0 ? "border-accent bg-accent text-accent-ink" : "border-line bg-tile"
+            }`}
+          >
+            <p className="display text-[2.5rem] leading-[0.95]">{d.titre}</p>
+            <p className={`mt-6 text-[0.95rem] leading-relaxed ${k === 0 ? "text-accent-ink/80" : "text-text-3"}`}>
+              {d.detail}
+            </p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
 
 function Competences() {
   return (
-    <section id="competences" aria-labelledby="t-competences" className="border-t border-line py-20 sm:py-28">
-      <div className={cadre}>
-        <EnTete id="t-competences" titre="Compétences" />
-        <dl className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {competences.map((c) => (
-            <div key={c.groupe}>
-              <dt className="text-sm font-medium">{c.groupe}</dt>
-              <dd className="mt-3">
-                <ul className="flex flex-wrap gap-1.5">
-                  {c.items.map((i) => (
-                    <li key={i} className="rounded-md border border-line bg-surface px-2.5 py-1 text-sm text-ink-2">
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+    <section id="competences" aria-labelledby="t-competences" className={`${cadre} py-16 lg:py-24`}>
+      <Titre id="t-competences">Compétences</Titre>
+      <dl className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+        {competences.map((c) => (
+          <div key={c.groupe} data-tilt className="tile p-6">
+            <dt className="text-sm text-text-3">{c.groupe}</dt>
+            <dd className="mt-4">
+              <ul className="flex flex-wrap gap-1.5">
+                {c.items.map((i) => (
+                  <li key={i} className="rounded-lg border border-line-2 bg-tile-2 px-2.5 py-1 text-sm text-text-2">
+                    {i}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }
 
+/* ——— Cap ——— */
+
 function Cap() {
+  const [avant, apres] = cap.citation.split("génie logiciel");
   return (
-    <section aria-labelledby="t-cap" className="border-t border-line bg-surface py-20 sm:py-28">
-      <div className={cadre}>
-        <h2 id="t-cap" className="text-3xl font-semibold tracking-[-0.025em] sm:text-4xl">
-          Mon cap
-        </h2>
-        <blockquote className="mt-8 max-w-4xl">
-          <p className="text-[clamp(1.5rem,3.2vw,2.25rem)] font-medium leading-[1.25] tracking-[-0.02em]">
-            « {cap.citation} »
-          </p>
-        </blockquote>
-        <div className="mt-10 grid max-w-4xl gap-6 text-[1.0625rem] leading-relaxed text-ink-2 md:grid-cols-2 md:gap-10">
+    <section aria-labelledby="t-cap" className={`${cadre} py-16 lg:py-24`}>
+      <div data-depth className="tile grid gap-12 p-7 sm:p-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:p-16">
+        <div>
+          <h2 id="t-cap" className="text-sm text-text-3">
+            Mon cap
+          </h2>
+          <blockquote className="mt-6">
+            <p className="display text-[clamp(2.1rem,4.4vw,3.75rem)] leading-none">
+              « {avant}
+              <span className="text-accent">génie logiciel</span>
+              {apres} »
+            </p>
+          </blockquote>
+        </div>
+        <div className="space-y-5 self-end text-[1.0625rem] leading-relaxed text-text-2">
           {cap.texte.map((t) => (
             <p key={t}>{t}</p>
           ))}
+          <p className="border-t border-line pt-5 text-sm text-text-3">{cap.horsCode}</p>
         </div>
-        <p className="mt-8 text-sm text-ink-3">{cap.horsCode}</p>
       </div>
     </section>
   );
 }
 
+/* ——— Contact ——— */
+
 function Contact() {
   const actions = [
-    { label: "Écrire un e-mail", href: `mailto:${profil.email}`, icone: <Mail className="size-4" {...trait} />, principal: true },
     { label: "WhatsApp", href: profil.whatsappLien, icone: <WhatsAppMark className="size-4" /> },
     { label: "GitHub", href: profil.github, icone: <GitHubMark className="size-4" /> },
     ...(profil.linkedin
@@ -418,85 +459,80 @@ function Contact() {
   ];
 
   return (
-    <section id="contact" aria-labelledby="t-contact" className="border-t border-line py-20 sm:py-28">
-      <div className={cadre}>
-        <div className="rounded-3xl bg-ink px-6 py-12 text-white sm:px-12 sm:py-16">
-          <h2 id="t-contact" className="text-3xl font-semibold tracking-[-0.025em] sm:text-4xl">
-            Me contacter
-          </h2>
-          <p className="mt-4 max-w-[56ch] text-[1.0625rem] leading-relaxed text-white/75">
-            Pour une candidature en master, un stage ou un projet, je réponds par e-mail et sur WhatsApp.
-          </p>
+    <section id="contact" aria-labelledby="t-contact" className={`${cadre} pb-16 pt-24 lg:pt-32`}>
+      <div data-depth="fort" className="rounded-[28px] bg-accent p-7 text-accent-ink sm:p-12 lg:p-16">
+        <h2 id="t-contact" className="display text-[clamp(3rem,7vw,6rem)] leading-[0.92]">
+          Travaillons ensemble.
+        </h2>
+        <p className="mt-6 max-w-[52ch] text-[1.0625rem] leading-relaxed text-accent-ink/80">
+          Pour une candidature en master, un stage ou un projet : je réponds par e-mail et sur WhatsApp.
+        </p>
 
-          <a
-            href={`mailto:${profil.email}`}
-            className="mt-8 inline-block break-all text-[clamp(1.4rem,3.6vw,2.25rem)] font-medium tracking-tight underline decoration-white/30 decoration-1 underline-offset-[0.2em] transition-colors hover:decoration-white"
-          >
-            {profil.email}
-          </a>
+        <a
+          href={`mailto:${profil.email}`}
+          className="mt-10 inline-flex items-center gap-3 break-all text-[clamp(1.4rem,3.6vw,2.5rem)] font-semibold tracking-tight underline decoration-accent-ink/30 decoration-2 underline-offset-[0.2em] transition-colors hover:decoration-accent-ink"
+        >
+          <Mail className="size-7 shrink-0 max-sm:hidden" {...trait} />
+          {profil.email}
+        </a>
 
-          <ul className="mt-8 flex flex-wrap gap-3">
-            {actions.map((a) => (
-              <li key={a.label}>
-                <a
-                  href={a.href}
-                  target={a.href.startsWith("http") ? "_blank" : undefined}
-                  rel={a.href.startsWith("http") ? "noopener" : undefined}
-                  className={`inline-flex h-11 items-center gap-2 rounded-[10px] px-4 text-[0.95rem] font-medium transition-colors ${
-                    "principal" in a && a.principal
-                      ? "bg-white text-ink hover:bg-white/90"
-                      : "border border-white/20 text-white hover:border-white/50 hover:bg-white/5"
-                  }`}
-                >
-                  {a.icone}
-                  {a.label}
-                </a>
-              </li>
-            ))}
-            <li>
+        <ul className="mt-10 flex flex-wrap gap-3">
+          {actions.map((a) => (
+            <li key={a.label}>
               <a
-                href={profil.cv}
-                download
-                className="inline-flex h-11 items-center gap-2 rounded-[10px] border border-white/20 px-4 text-[0.95rem] font-medium text-white transition-colors hover:border-white/50 hover:bg-white/5"
+                href={a.href}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex h-12 items-center gap-2 rounded-xl bg-accent-ink px-5 font-medium text-text transition-colors hover:bg-bg"
               >
-                <Download className="size-4" {...trait} />
-                CV (PDF)
+                {a.icone}
+                {a.label}
               </a>
             </li>
-          </ul>
+          ))}
+          <li>
+            <a
+              href={profil.cv}
+              download
+              className="inline-flex h-12 items-center gap-2 rounded-xl border-[1.5px] border-accent-ink/40 px-5 font-medium transition-colors hover:border-accent-ink"
+            >
+              <Download className="size-4" {...trait} />
+              CV (PDF)
+            </a>
+          </li>
+        </ul>
 
-          <dl className="mt-10 grid gap-4 border-t border-white/15 pt-6 text-sm text-white/75 sm:grid-cols-3">
-            <div className="flex items-center gap-2">
-              <dt>
-                <Phone className="size-4" {...trait} />
-                <span className="sr-only">Téléphone</span>
-              </dt>
-              <dd>
-                <a href={`tel:${profil.telephoneLien}`} className="tabular-nums hover:text-white">
-                  {profil.telephone}
-                </a>
-              </dd>
-            </div>
-            <div className="flex items-center gap-2">
-              <dt>
-                <WhatsAppMark className="size-4" />
-                <span className="sr-only">WhatsApp</span>
-              </dt>
-              <dd>
-                <a href={profil.whatsappLien} target="_blank" rel="noopener" className="tabular-nums hover:text-white">
-                  {profil.whatsapp}
-                </a>
-              </dd>
-            </div>
-            <div className="flex items-center gap-2">
-              <dt>
-                <MapPin className="size-4" {...trait} />
-                <span className="sr-only">Localisation</span>
-              </dt>
-              <dd>{profil.localisation}</dd>
-            </div>
-          </dl>
-        </div>
+        <dl className="mt-12 grid gap-4 border-t border-accent-ink/20 pt-6 text-[0.95rem] sm:grid-cols-3">
+          <div className="flex items-center gap-2">
+            <dt>
+              <Phone className="size-4" {...trait} />
+              <span className="sr-only">Téléphone</span>
+            </dt>
+            <dd>
+              <a href={`tel:${profil.telephoneLien}`} className="tabular-nums hover:underline">
+                {profil.telephone}
+              </a>
+            </dd>
+          </div>
+          <div className="flex items-center gap-2">
+            <dt>
+              <WhatsAppMark className="size-4" />
+              <span className="sr-only">WhatsApp</span>
+            </dt>
+            <dd>
+              <a href={profil.whatsappLien} target="_blank" rel="noopener" className="tabular-nums hover:underline">
+                {profil.whatsapp}
+              </a>
+            </dd>
+          </div>
+          <div className="flex items-center gap-2">
+            <dt>
+              <MapPin className="size-4" {...trait} />
+              <span className="sr-only">Localisation</span>
+            </dt>
+            <dd>{profil.localisation}</dd>
+          </div>
+        </dl>
       </div>
     </section>
   );
@@ -507,11 +543,12 @@ export default function Page() {
     <>
       <a
         href="#projets"
-        className="sr-only z-50 rounded-lg bg-accent px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-50 rounded-lg bg-accent px-4 py-2 font-semibold text-accent-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Aller au contenu
       </a>
       <Header />
+      <Effets3D />
       <main>
         <Hero />
         <Projets />
@@ -521,19 +558,19 @@ export default function Page() {
         <Cap />
         <Contact />
       </main>
-      <footer className="border-t border-line">
-        <div className={`${cadre} flex flex-col gap-3 py-8 text-sm text-ink-3 sm:flex-row sm:items-center sm:justify-between`}>
-          <p>
-            © 2026 {profil.prenom} {profil.nom}
-          </p>
-          <div className="flex gap-6">
-            <a href={profil.codeSource} target="_blank" rel="noopener" className="hover:text-ink">
-              Code source du site
-            </a>
-            <a href="#" className="hover:text-ink">
-              Haut de page
-            </a>
-          </div>
+      <footer
+        className={`${cadre} flex flex-col gap-4 pb-10 pt-6 text-sm text-text-3 sm:flex-row sm:items-center sm:justify-between`}
+      >
+        <p className="flex items-center gap-3">
+          <Drapeau />© 2026 {profil.prenom} {profil.nom}
+        </p>
+        <div className="flex gap-6">
+          <a href={profil.codeSource} target="_blank" rel="noopener" className="hover:text-text">
+            Code source du site
+          </a>
+          <a href="#" className="hover:text-text">
+            Haut de page
+          </a>
         </div>
       </footer>
     </>

@@ -1,85 +1,79 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-09T12:00:00Z",
+  "generatedAt": "2026-11-09T14:00:00Z",
   "title": "Design System: Portfolio MONKIÉ",
   "extensions": {
     "colorMeta": {
       "bg": {
         "role": "neutral",
-        "displayName": "Stone 50",
-        "canonical": "#FAFAF9",
+        "displayName": "Nuit",
+        "canonical": "#0B0D12",
         "tonalRamp": [
-          "#FFFFFF",
-          "#FAFAF9",
-          "#F5F5F4",
-          "#E7E5E4",
-          "#D6D3D1",
-          "#6B6560",
-          "#44403C",
-          "#0C0C0E"
+          "#0B0D12",
+          "#0F1218",
+          "#13161D",
+          "#1F2430",
+          "#2A2F3A",
+          "#9AA1AF",
+          "#C3C8D2",
+          "#ECEEF2"
         ]
       },
       "accent": {
         "role": "primary",
-        "displayName": "Bleu nuit",
-        "canonical": "#1E3A8A",
+        "displayName": "Orange Côte d'Ivoire",
+        "canonical": "#FF8A3D",
         "tonalRamp": [
-          "#EEF2FB",
-          "#1E3A8A",
-          "#172E6E"
+          "#FFB27A",
+          "#FF9C59",
+          "#FF8A3D"
         ]
       }
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Display",
-        "purpose": "Nom dans le premier écran."
+        "displayName": "Bricolage Grotesque",
+        "purpose": "Titres, noms de projets, slogan."
       },
       "meta": {
-        "displayName": "Mono",
-        "purpose": "Dates et étiquettes de stack uniquement."
+        "displayName": "Geist Mono",
+        "purpose": "Dates et étiquettes de stack."
       }
     },
-    "shadows": [
-      {
-        "name": "card-identity",
-        "value": "0 1px 2px rgb(12 12 14/.04), 0 8px 24px -12px rgb(12 12 14/.08)",
-        "purpose": "Carte d'identité du premier écran uniquement."
-      }
-    ],
+    "shadows": [],
     "motion": [
+      {
+        "name": "hero-assembly",
+        "value": "GSAP ScrollTrigger pin, end +=130%, scrub 1, stagger 0.06",
+        "purpose": "Les tuiles quittent la profondeur et forment le bento."
+      },
+      {
+        "name": "depth-arrive",
+        "value": "rotationX 16–32deg → 0, y 60–80 → 0, scrub 1",
+        "purpose": "Les panneaux suivants se posent à plat."
+      },
+      {
+        "name": "hover-tilt",
+        "value": "±6deg quickTo 0.5s power3.out",
+        "purpose": "Petites tuiles au survol."
+      },
       {
         "name": "ease",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Entrée unique du premier écran (0,8s, décalage 80ms)."
-      },
-      {
-        "name": "feedback",
-        "value": "150ms colors",
-        "purpose": "Survol des boutons et liens."
+        "purpose": "Transitions CSS et entrée mobile."
       }
     ],
     "breakpoints": [
       {
-        "name": "sm",
-        "value": "640px",
-        "purpose": "Boutons côte à côte."
-      },
-      {
-        "name": "md",
-        "value": "768px",
-        "purpose": "Navigation complète."
-      },
-      {
         "name": "lg",
         "value": "1024px",
-        "purpose": "Premier écran en deux colonnes, cartes projet par deux."
+        "purpose": "Bento 3 colonnes et 3D activée."
       }
     ],
     "rules": [
-      "Un seul accent bleu nuit, rare.",
-      "Clair et sobre : jamais de fond coloré pleine page.",
-      "Structure Besoin / Rôle / Résultat pour chaque projet."
+      "Un seul accent orange.",
+      "La 3D se désactive sous 1024px et avec la réduction des animations.",
+      "Aperçus de projets dessinés en code et signalés comme illustratifs."
     ]
   }
 }

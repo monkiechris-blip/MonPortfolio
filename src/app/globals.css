@@ -1,46 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --subtle: #f5f5f4;
-  --line: #e7e5e4;
-  --line-strong: #d6d3d1;
-  --ink: #0c0c0e;
-  --ink-2: #44403c;
-  --ink-3: #6b6560;
-  --accent: #1e3a8a;
-  --accent-hover: #172e6e;
-  --accent-soft: #eef2fb;
+  --bg: #0b0d12;
+  --tile: #13161d;
+  --tile-2: #0f1218;
+  --line: #1f2430;
+  --line-2: #2a2f3a;
+  --text: #eceef2;
+  --text-2: #c3c8d2;
+  --text-3: #9aa1af;
+  --accent: #ff8a3d;
+  --accent-ink: #13161d;
+  --ci-green: #009e60;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-subtle: var(--subtle);
+  --color-tile: var(--tile);
+  --color-tile-2: var(--tile-2);
   --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
+  --color-line-2: var(--line-2);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-soft: var(--accent-soft);
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-accent-ink: var(--accent-ink);
+  --color-ci-green: var(--ci-green);
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
   background: var(--bg);
-  scrollbar-color: var(--line-strong) var(--bg);
+  color-scheme: dark;
+  scrollbar-color: var(--line-2) var(--bg);
 }
 
 body {
   background: var(--bg);
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -48,13 +47,13 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 a {
@@ -72,15 +71,36 @@ p {
   text-wrap: pretty;
 }
 
+/* Voix d'affichage : grotesque à caractère, légèrement resserrée. */
+.display {
+  font-family: var(--font-bricolage), var(--font-geist), sans-serif;
+  font-variation-settings: "wdth" 80, "opsz" 96;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 .mono {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }
 
+/* Tuile du bento */
+.tile {
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+a.tile:hover,
+.tile-hover:hover {
+  border-color: var(--line-2);
+  background-color: #151922;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -88,15 +108,19 @@ p {
   }
 }
 
-/* Une seule entrée au chargement, sur le premier écran. */
+/* Une seule entrée, le bento du premier écran, en vague. */
 .rise {
-  animation: rise 0.8s var(--ease) both;
+  animation: rise 0.9s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
 }
-.rise-2 {
-  animation: rise 0.8s var(--ease) 0.08s both;
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
 }
-.rise-3 {
-  animation: rise 0.8s var(--ease) 0.16s both;
+.caret {
+  animation: caret 1s steps(1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -104,8 +128,36 @@ p {
     scroll-behavior: auto;
   }
   .rise,
-  .rise-2,
-  .rise-3 {
+  .caret {
     animation: none;
+  }
+}
+
+/* ——— 3D ——— */
+.perspective-scene {
+  perspective: 1600px;
+  perspective-origin: 50% 40%;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.intro3d {
+  display: none;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .js .intro3d {
+    display: flex;
+  }
+  .js [data-hero-tile].rise {
+    animation: none;
+  }
+  .js .attente-3d [data-hero-tile] {
+    opacity: 0;
+  }
+  [data-hero-tile],
+  [data-depth] {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
   }
 }
