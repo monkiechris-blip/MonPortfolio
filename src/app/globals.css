@@ -38,6 +38,8 @@ html {
 }
 
 body {
+  /* Les tuiles dispersées en 3D ne doivent jamais créer de défilement horizontal. */
+  overflow-x: clip;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
@@ -145,7 +147,7 @@ a.tile:hover,
   display: none;
 }
 
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .js .intro3d {
     display: flex;
   }

@@ -68,10 +68,13 @@ export function SkillMapPreview({
   lignes = 2,
   grand = false,
   langue = "fr",
+  compact = false,
 }: {
   lignes?: number;
   grand?: boolean;
   langue?: "fr" | "en";
+  // Sur téléphone, la tuile est petite : on ne garde que la recherche et un filtre.
+  compact?: boolean;
 }) {
   const scenes = langue === "en" ? scenesEn : scenesFr;
   const contacter = langue === "en" ? "Contact" : "Contacter";
@@ -117,7 +120,7 @@ export function SkillMapPreview({
           <span className="caret ml-px inline-block h-[1.05em] w-px translate-y-[0.15em] bg-accent" />
         </span>
       </div>
-      <div className="mt-2.5 flex flex-wrap gap-1.5">
+      <div className={`mt-2.5 flex flex-wrap gap-1.5 ${compact ? "max-sm:h-6 max-sm:overflow-hidden" : ""}`}>
         {s.filtres.map((f, k) => (
           <span
             key={f}
@@ -129,7 +132,7 @@ export function SkillMapPreview({
           </span>
         ))}
       </div>
-      <ul className="mt-3 space-y-2">
+      <ul className={`mt-3 space-y-2 ${compact ? "max-sm:hidden" : ""}`}>
         {s.resultats.slice(0, lignes).map((r, k) => (
           <li
             key={r.nom}

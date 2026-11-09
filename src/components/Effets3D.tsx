@@ -18,8 +18,13 @@ const dispersion = [
 export function Effets3D() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
+    // Sur téléphone, la barre d'adresse change la hauteur : on évite de tout recalculer à chaque fois.
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
-    mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // La dispersion suit la largeur de l'écran : moins d'écart sur téléphone.
+      const k = Math.min(1, Math.max(0.32, window.innerWidth / 1440));
+      const souris = window.matchMedia("(pointer: fine)").matches;
       const section = document.querySelector<HTMLElement>("[data-hero3d]");
       const scene = document.querySelector<HTMLElement>("[data-scene]");
       const tuiles = gsap.utils.toArray<HTMLElement>("[data-hero-tile]");
@@ -27,37 +32,74 @@ export function Effets3D() {
       // 1. L'assemblage (page d'accueil uniquement) : les tuiles quittent la profondeur et forment le bento.
       let bouge: ((e: PointerEvent) => void) | null = null;
       if (section && scene && intro && tuiles.length > 0) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top+=64",
-          end: "+=130%",
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
-      tuiles.forEach((t, i) => {
-        tl.fromTo(
-          t,
-          { ...dispersion[i % dispersion.length], opacity: 0.4 },
-          { x: 0, y: 0, z: 0, rotationX: 0, rotationY: 0, rotationZ: 0, opacity: 1, ease: "power2.out", duration: 1 },
-          i * 0.06,
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top+=64",
+            end: "+=130%",
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+          },
+        });
+        tuiles.forEach((t, i) => {
+          tl.fromTo(
+            t,
+            (() => {
+              const d = dispersion[i % dispersion.length];
+              return {
+                ...d,
+                x: d.x * k,
+                y: d.y * k,
+                z: d.z * Math.max(k, 0.6),
+                opacity: 0.4,
+              };
+            })(),
+            {
+              x: 0,
+              y: 0,
+              z: 0,
+              rotationX: 0,
+              rotationY: 0,
+              rotationZ: 0,
+              opacity: 1,
+              ease: "power2.out",
+              duration: 1,
+            },
+            i * 0.06,
+          );
+        });
+        tl.to(
+          intro,
+          {
+            z: 500,
+            scale: 1.12,
+            opacity: 0,
+            ease: "power1.in",
+            duration: 0.55,
+          },
+          0,
         );
-      });
-      tl.to(intro, { z: 500, scale: 1.12, opacity: 0, ease: "power1.in", duration: 0.55 }, 0);
-      section.classList.remove("attente-3d");
+        section.classList.remove("attente-3d");
 
-      // La scène suit légèrement la souris.
-      const rx = gsap.quickTo(scene, "rotationX", { duration: 0.8, ease: "power3.out" });
-      const ry = gsap.quickTo(scene, "rotationY", { duration: 0.8, ease: "power3.out" });
-      bouge = (e: PointerEvent) => {
-        const nx = e.clientX / window.innerWidth - 0.5;
-        const ny = e.clientY / window.innerHeight - 0.5;
-        rx(-ny * 5);
-        ry(nx * 7);
-      };
-      window.addEventListener("pointermove", bouge);
+        // La scène suit légèrement la souris (ordinateur uniquement).
+        if (souris) {
+          const rx = gsap.quickTo(scene, "rotationX", {
+            duration: 0.8,
+            ease: "power3.out",
+          });
+          const ry = gsap.quickTo(scene, "rotationY", {
+            duration: 0.8,
+            ease: "power3.out",
+          });
+          bouge = (e: PointerEvent) => {
+            const nx = e.clientX / window.innerWidth - 0.5;
+            const ny = e.clientY / window.innerHeight - 0.5;
+            rx(-ny * 5);
+            ry(nx * 7);
+          };
+          window.addEventListener("pointermove", bouge);
+        }
       }
 
       // 2. Les panneaux suivants arrivent de la profondeur et se posent à plat.
@@ -65,7 +107,13 @@ export function Effets3D() {
         const fort = el.dataset.depth === "fort";
         gsap.fromTo(
           el,
-          { rotationX: fort ? 32 : 16, y: fort ? 80 : 60, z: fort ? -160 : -80, opacity: fort ? 0.5 : 0.3, transformPerspective: 1400 },
+          {
+            rotationX: fort ? 32 : 16,
+            y: fort ? 80 : 60,
+            z: fort ? -160 : -80,
+            opacity: fort ? 0.5 : 0.3,
+            transformPerspective: 1400,
+          },
           {
             rotationX: 0,
             y: 0,
@@ -84,10 +132,18 @@ export function Effets3D() {
         );
       });
 
-      // 3. Inclinaison au survol.
-      const nettoyages = gsap.utils.toArray<HTMLElement>("[data-tilt]").map((el) => {
-        const tx = gsap.quickTo(el, "rotationY", { duration: 0.5, ease: "power3.out" });
-        const ty = gsap.quickTo(el, "rotationX", { duration: 0.5, ease: "power3.out" });
+      // 3. Inclinaison au survol (ordinateur uniquement).
+      const nettoyages = (
+        souris ? gsap.utils.toArray<HTMLElement>("[data-tilt]") : []
+      ).map((el) => {
+        const tx = gsap.quickTo(el, "rotationY", {
+          duration: 0.5,
+          ease: "power3.out",
+        });
+        const ty = gsap.quickTo(el, "rotationX", {
+          duration: 0.5,
+          ease: "power3.out",
+        });
         gsap.set(el, { transformPerspective: 1200 });
         const dedans = (e: PointerEvent) => {
           const r = el.getBoundingClientRect();
@@ -117,8 +173,8 @@ export function Effets3D() {
       };
     });
 
-    // Hors 3D : on retire l'attente pour afficher la grille normale.
-    mm.add("(max-width: 1023px), (prefers-reduced-motion: reduce)", () => {
+    // Animations réduites : on retire l'attente pour afficher la grille normale.
+    mm.add("(prefers-reduced-motion: reduce)", () => {
       document.querySelector("[data-hero3d]")?.classList.remove("attente-3d");
     });
 

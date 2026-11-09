@@ -126,12 +126,12 @@ function Hero({ c }: { c: Contenu }) {
           aria-hidden
           className="intro3d pointer-events-none absolute inset-0 z-10 flex-col items-center justify-center text-center"
         >
-          <p className="display text-[clamp(5rem,12vw,11.5rem)] leading-[0.85]">
+          <p className="display text-[clamp(3.6rem,15vw,11.5rem)] leading-[0.85]">
             Chris-Orhé
             <br />
             <span className="text-accent">MONKIÉ</span>
           </p>
-          <p className="mt-8 text-lg text-text-2">{c.ui.introSousTitre}</p>
+          <p className="mt-6 text-base text-text-2 sm:mt-8 sm:text-lg">{c.ui.introSousTitre}</p>
           <p className="mt-10 flex flex-col items-center gap-1 text-sm text-text-3">
             {c.ui.introDefiler}
             <ChevronDown className="size-4" {...trait} />
@@ -140,25 +140,25 @@ function Hero({ c }: { c: Contenu }) {
 
         <div
           data-scene
-          className="preserve-3d grid grid-cols-[minmax(0,1fr)] gap-3 sm:gap-4 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-[1.25fr_0.9fr_0.85fr] lg:grid-rows-[minmax(19rem,1fr)_minmax(17rem,1fr)]"
+          className="preserve-3d grid grid-cols-2 grid-rows-[auto_13.5rem_13.5rem] gap-3 sm:grid-rows-[auto_17rem_17rem] sm:gap-4 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-[1.25fr_0.9fr_0.85fr] lg:grid-rows-[minmax(19rem,1fr)_minmax(17rem,1fr)]"
         >
           <div
             data-hero-tile
-            className="tile rise flex flex-col justify-between gap-10 p-7 sm:p-10 lg:row-span-2"
+            className="tile rise col-span-2 flex flex-col justify-between gap-10 p-5 sm:p-10 lg:col-span-1 lg:row-span-2"
             style={vague(0)}
           >
             <div>
-              <h1 id="t-hero" className="display text-[clamp(3.1rem,6.4vw,6.5rem)] leading-[0.9]">
+              <h1 id="t-hero" className="display text-[clamp(2.5rem,6.4vw,6.5rem)] leading-[0.9]">
                 <span className="sr-only">
                   {c.profil.prenom} {c.profil.nom},{" "}
                 </span>
                 {c.profil.accroche} <span className="text-accent">{c.profil.accrocheMot}</span>
               </h1>
-              <p className="mt-7 max-w-[34ch] text-xl leading-relaxed text-text-2">{c.profil.presentation}</p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <p className="mt-4 max-w-[34ch] text-[0.95rem] leading-relaxed text-text-2 sm:mt-7 sm:text-xl">{c.profil.presentation}</p>
+              <div className="mt-5 flex gap-2 sm:mt-9 sm:gap-3">
                 <a
                   href="#projets"
-                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-accent px-5 font-semibold text-accent-ink transition-colors hover:bg-[#6BA1FF]"
+                  className="group inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-3 text-sm font-semibold sm:h-12 sm:flex-none sm:px-5 sm:text-base text-accent-ink transition-colors hover:bg-[#6BA1FF]"
                 >
                   {c.ui.voirProjets}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" {...trait} />
@@ -166,14 +166,15 @@ function Hero({ c }: { c: Contenu }) {
                 <a
                   href={c.profil.cv}
                   download
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-line-2 px-5 font-medium transition-colors hover:border-text-3 hover:bg-tile-2"
+                  className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-line-2 px-3 text-sm font-medium transition-colors hover:border-text-3 hover:bg-tile-2 sm:h-12 sm:flex-none sm:px-5 sm:text-base"
                 >
                   <Download className="size-4" {...trait} />
-                  {c.ui.telechargerCv}
+                  <span className="sm:hidden">{c.ui.cvCourt}</span>
+                  <span className="hidden sm:inline">{c.ui.telechargerCv}</span>
                 </a>
               </div>
             </div>
-            <p className="flex flex-wrap items-center gap-3 text-sm text-text-3">
+            <p className="hidden flex-wrap items-center gap-3 text-sm text-text-3 sm:flex">
               <Drapeau />
               {c.ui.lieuDiplome}
             </p>
@@ -182,24 +183,24 @@ function Hero({ c }: { c: Contenu }) {
           <a
             data-hero-tile
             href={`#${skillmap.id}`}
-            className="tile rise relative flex flex-col gap-4 p-6 sm:p-7"
+            className="tile rise relative flex flex-col gap-3 overflow-hidden p-4 sm:gap-4 sm:p-7"
             style={vague(1)}
           >
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-col-reverse items-start justify-between gap-2 sm:flex-row sm:gap-3">
               <div>
-                <p className="display text-3xl">{skillmap.nom}</p>
-                <p className="text-sm text-text-3">{skillmap.sousTitre}</p>
+                <p className="display text-2xl sm:text-3xl">{skillmap.nom}</p>
+                <p className="text-xs text-text-3 sm:text-sm">{skillmap.sousTitre}</p>
               </div>
               <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-accent-ink">
                 {c.ui.skillmapPrix}
               </span>
             </div>
-            <SkillMapPreview lignes={2} langue={c.langue} />
+            <SkillMapPreview lignes={2} langue={c.langue} compact />
           </a>
 
           <div
             data-hero-tile
-            className="tile rise relative min-h-[24rem] overflow-hidden lg:min-h-0"
+            className="tile rise relative overflow-hidden"
             style={vague(2)}
           >
             <Image
@@ -207,19 +208,19 @@ function Hero({ c }: { c: Contenu }) {
               alt={c.ui.portraitAlt}
               fill
               priority
-              sizes="(min-width: 1024px) 25vw, 100vw"
+              sizes="(min-width: 1024px) 25vw, 50vw"
               className="object-cover object-[50%_18%]"
             />
-            <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/10 bg-bg/80 px-4 py-3 backdrop-blur-md">
-              <p className="font-semibold">{c.ui.candidat}</p>
-              <p className="text-sm text-text-2">{c.ui.candidatDetail}</p>
+            <div className="absolute inset-x-2 bottom-2 rounded-xl border border-white/10 bg-bg/80 px-3 py-2 backdrop-blur-md sm:inset-x-3 sm:bottom-3 sm:rounded-2xl sm:px-4 sm:py-3">
+              <p className="text-sm font-semibold sm:text-base">{c.ui.candidat}</p>
+              <p className="text-xs text-text-2 sm:text-sm">{c.ui.candidatDetail}</p>
             </div>
           </div>
 
           <a
             data-hero-tile
             href={`#${medmap.id}`}
-            className="tile rise relative flex min-h-[17rem] flex-col justify-between overflow-hidden p-6 sm:p-7"
+            className="tile rise relative flex flex-col justify-between overflow-hidden p-4 sm:p-7"
             style={vague(3)}
           >
             {capture && (
@@ -227,35 +228,36 @@ function Hero({ c }: { c: Contenu }) {
                 src={capture.src}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 30vw, 100vw"
-                className="object-cover object-left-top opacity-45"
+                sizes="(min-width: 1024px) 30vw, 50vw"
+                className="object-cover object-left-top opacity-25 sm:opacity-45"
               />
             )}
-            <div aria-hidden className="absolute inset-0 bg-linear-to-b from-bg/90 via-bg/40 to-bg/90" />
+            <div aria-hidden className="absolute inset-0 bg-linear-to-b from-bg via-bg/60 to-bg/90 sm:from-bg/90 sm:via-bg/40" />
             <div className="relative">
-              <p className="display text-3xl">{medmap.nom}</p>
-              <p className="text-sm text-text-2">{c.ui.medmapTuile}</p>
+              <p className="display text-2xl sm:text-3xl">{medmap.nom}</p>
+              <p className="text-xs text-text-2 sm:text-sm">{c.ui.medmapTuile}</p>
             </div>
-            <div className="relative rounded-xl border border-line-2 bg-bg/90 px-4 py-3">
-              <p className="flex items-center gap-2 text-sm font-semibold">
-                <span aria-hidden className="size-1.5 rounded-full bg-ci-green" />
-                medmap-plus-frontend.vercel.app
+            <div className="relative rounded-xl border border-line-2 bg-bg/90 px-3 py-2 sm:px-4 sm:py-3">
+              <p className="flex items-center gap-2 text-xs font-semibold sm:text-sm">
+                <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-ci-green" />
+                <span className="sm:hidden">{c.ui.voirDemo}</span>
+                <span className="hidden truncate sm:inline">medmap-plus-frontend.vercel.app</span>
               </p>
-              <p className="text-xs text-text-3">{c.ui.medmapTuileDetail}</p>
+              <p className="hidden text-xs text-text-3 sm:block">{c.ui.medmapTuileDetail}</p>
             </div>
           </a>
 
           <div
             data-hero-tile
-            className="tile rise flex flex-col justify-between gap-6 p-6 sm:p-7"
+            className="tile rise flex flex-col justify-between gap-3 p-4 sm:gap-6 sm:p-7"
             style={vague(4)}
           >
-            <p className="text-sm text-text-3">{c.ui.distinctions}</p>
+            <p className="text-xs text-text-3 sm:text-sm">{c.ui.distinctions}</p>
             <div>
-              <p className="display text-[clamp(3.5rem,5vw,4.5rem)] leading-none">
+              <p className="display text-[clamp(2.3rem,5vw,4.5rem)] leading-none">
                 {c.langue === "fr" ? "Major" : "Top rank"}
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-text-2">{c.ui.majorDetail}</p>
+              <p className="mt-2 text-xs leading-snug text-text-2 sm:mt-3 sm:text-sm sm:leading-relaxed">{c.ui.majorDetail}</p>
             </div>
           </div>
         </div>
@@ -444,17 +446,17 @@ function Distinctions({ c }: { c: Contenu }) {
   return (
     <section aria-labelledby="t-distinctions" className={`${cadre} py-16 lg:py-24`}>
       <Titre id="t-distinctions">{c.ui.distinctions}</Titre>
-      <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+      <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {c.distinctions.map((d, k) => (
           <li
             key={d.titre}
             data-tilt
-            className={`flex min-h-48 flex-col justify-between rounded-[22px] border p-6 sm:p-7 ${
+            className={`flex min-h-40 flex-col justify-between rounded-[22px] border p-4 sm:min-h-48 sm:p-7 ${
               k === 0 ? "border-accent bg-accent text-accent-ink" : "border-line bg-tile"
             }`}
           >
-            <p className="display text-[2.5rem] leading-[0.95]">{d.titre}</p>
-            <p className={`mt-6 text-[0.95rem] leading-relaxed ${k === 0 ? "text-accent-ink" : "text-text-3"}`}>
+            <p className="display text-[clamp(1.6rem,6vw,2.5rem)] leading-[0.95]">{d.titre}</p>
+            <p className={`mt-4 text-sm leading-snug sm:mt-6 sm:text-[0.95rem] sm:leading-relaxed ${k === 0 ? "text-accent-ink" : "text-text-3"}`}>
               {d.detail}
             </p>
           </li>
@@ -468,14 +470,14 @@ function Competences({ c }: { c: Contenu }) {
   return (
     <section id="competences" aria-labelledby="t-competences" className={`${cadre} py-16 lg:py-24`}>
       <Titre id="t-competences">{c.ui.competences}</Titre>
-      <dl className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {c.competences.map((g) => (
-          <div key={g.groupe} data-tilt className="tile p-6">
+          <div key={g.groupe} data-tilt className="tile p-4 sm:p-6">
             <dt className="text-sm text-text-3">{g.groupe}</dt>
             <dd className="mt-4">
               <ul className="flex flex-wrap gap-1.5">
                 {g.items.map((i) => (
-                  <li key={i} className="rounded-lg border border-line-2 bg-tile-2 px-2.5 py-1 text-sm text-text-2">
+                  <li key={i} className="rounded-lg border border-line-2 bg-tile-2 px-2 py-1 text-xs text-text-2 sm:px-2.5 sm:text-sm">
                     {i}
                   </li>
                 ))}
