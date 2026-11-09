@@ -71,7 +71,14 @@ export function Effets3D() {
             z: 0,
             opacity: 1,
             ease: "none",
-            scrollTrigger: { trigger: el, start: "top bottom", end: fort ? "center 60%" : "top 55%", scrub: 1 },
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: fort ? "bottom bottom" : "top 55%",
+              scrub: 1,
+              // Une fois posé à plat, on retire la transformation 3D pour un rendu net.
+              onLeave: () => gsap.set(el, { clearProps: "transform" }),
+            },
           },
         );
       });

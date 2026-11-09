@@ -81,7 +81,7 @@ export function SkillMapPreview({ lignes = 2, grand = false }: { lignes?: number
           <span
             key={f}
             className={`rounded-full border px-2.5 py-1 text-xs ${
-              k === 0 ? "border-accent/40 bg-accent/10 text-[#FFB27A]" : "border-line-2 text-text-3"
+              k === 0 ? "border-accent/40 bg-accent/10 text-[#9EC1FF]" : "border-line-2 text-text-3"
             }`}
           >
             {f}

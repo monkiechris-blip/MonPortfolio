@@ -21,12 +21,12 @@
       },
       "accent": {
         "role": "primary",
-        "displayName": "Orange Côte d'Ivoire",
-        "canonical": "#FF8A3D",
+        "displayName": "Bleu électrique",
+        "canonical": "#4C8DFF",
         "tonalRamp": [
-          "#FFB27A",
-          "#FF9C59",
-          "#FF8A3D"
+          "#9EC1FF",
+          "#6BA1FF",
+          "#4C8DFF"
         ]
       }
     },
@@ -71,7 +71,7 @@
       }
     ],
     "rules": [
-      "Un seul accent orange.",
+      "Un seul accent bleu électrique.",
       "La 3D se désactive sous 1024px et avec la réduction des animations.",
       "Aperçus de projets dessinés en code et signalés comme illustratifs."
     ]

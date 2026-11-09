@@ -55,5 +55,5 @@ Portrait photo (from CV PDF). No project screenshots available.
 ## Brand commitments
 
 - 2026-11-09, history: user rejected (1) a saturated amber full-page world (tiring, "hurts the eyes") and (2) a plain light minimal layout ("too basic"). Then chose, from three rendered mockups, the **dark bento** direction and asked for a **3D scroll effect** like the ones seen on TikTok.
-- Standing preference: eye-catching, premium, dark, never "AI-looking" (no purple gradients, glows, emoji). Rich moments come from code-drawn product previews and 3D scroll motion, not decoration. One orange accent (Côte d'Ivoire orange) with the tricolor as signature.
+- Standing preference: eye-catching, premium, dark, never "AI-looking" (no purple gradients, glows, emoji). Rich moments come from code-drawn product previews and 3D scroll motion, not decoration. One electric blue accent #4C8DFF (user rejected orange as dominant color); the small Ivorian tricolor stays as signature only.
 - Always show rendered mockups before a big redesign; abstract option labels did not predict what the user liked.

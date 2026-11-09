@@ -16,9 +16,9 @@ export function MedMapPreview() {
         <circle cx="320" cy="250" r="4" />
         <circle cx="60" cy="110" r="4" />
       </g>
-      <circle cx="132" cy="96" r="22" fill="#FF8A3D" opacity=".16" />
-      <circle cx="132" cy="96" r="7" fill="#FF8A3D" />
-      <path d="M132 96L250 82" stroke="#FF8A3D" strokeDasharray="3 4" opacity=".6" />
+      <circle cx="132" cy="96" r="22" fill="#4C8DFF" opacity=".16" />
+      <circle cx="132" cy="96" r="7" fill="#4C8DFF" />
+      <path d="M132 96L250 82" stroke="#4C8DFF" strokeDasharray="3 4" opacity=".6" />
     </svg>
   );
 }
@@ -54,7 +54,7 @@ export function MyMiagePreview() {
                 <span
                   key={c.t}
                   className={`rounded-md px-1.5 py-1 text-[0.65rem] leading-tight ${
-                    c.a ? "bg-accent/15 text-[#FFB27A]" : c.e ? "bg-ci-green/20 text-[#7BD8AE]" : "bg-tile text-text-2"
+                    c.a ? "bg-accent/15 text-[#9EC1FF]" : c.e ? "bg-ci-green/20 text-[#7BD8AE]" : "bg-tile text-text-2"
                   }`}
                   style={{ gridRow: `${c.d + 1} / span ${c.h}` }}
                 >
@@ -71,7 +71,7 @@ export function MyMiagePreview() {
 export function Drapeau({ className = "" }: { className?: string }) {
   return (
     <span aria-hidden className={`inline-flex items-center gap-1 ${className}`}>
-      <i className="h-1 w-4 rounded-full bg-accent" />
+      <i className="h-1 w-4 rounded-full bg-[#F77F00]" />
       <i className="h-1 w-4 rounded-full bg-text" />
       <i className="h-1 w-4 rounded-full bg-ci-green" />
     </span>

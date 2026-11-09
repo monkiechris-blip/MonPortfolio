@@ -9,8 +9,8 @@
   --text: #eceef2;
   --text-2: #c3c8d2;
   --text-3: #9aa1af;
-  --accent: #ff8a3d;
-  --accent-ink: #13161d;
+  --accent: #4c8dff;
+  --accent-ink: #0b0d12;
   --ci-green: #009e60;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -155,9 +155,7 @@ a.tile:hover,
   .js .attente-3d [data-hero-tile] {
     opacity: 0;
   }
-  [data-hero-tile],
-  [data-depth] {
+  [data-hero-tile] {
     will-change: transform, opacity;
-    backface-visibility: hidden;
   }
 }

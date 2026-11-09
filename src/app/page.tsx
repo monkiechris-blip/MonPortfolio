@@ -129,7 +129,7 @@ function Hero() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#projets"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-accent px-5 font-semibold text-accent-ink transition-colors hover:bg-[#FF9C59]"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-accent px-5 font-semibold text-accent-ink transition-colors hover:bg-[#6BA1FF]"
               >
                 Voir les projets
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" {...trait} />
@@ -245,7 +245,7 @@ function Projets() {
           className="tile grid grid-cols-[minmax(0,1fr)] gap-10 p-6 sm:p-10 lg:col-span-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14"
         >
           <div className="flex flex-col">
-            <p className="inline-flex w-fit items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-[#FFB27A]">
+            <p className="inline-flex w-fit items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-[#9EC1FF]">
               <Trophy className="size-4" {...trait} />
               {skillmap.prix} · {skillmap.cadre}
             </p>
@@ -305,7 +305,7 @@ function Projets() {
 
         {enCours.map((e) => (
           <article key={e.nom} data-tilt className="tile p-6 sm:p-8 lg:col-span-3">
-            <p className="flex items-center gap-2 text-sm text-[#FFB27A]">
+            <p className="flex items-center gap-2 text-sm text-[#9EC1FF]">
               <span aria-hidden className="size-1.5 rounded-full bg-accent" />
               En cours
             </p>
@@ -383,7 +383,7 @@ function Distinctions() {
             }`}
           >
             <p className="display text-[2.5rem] leading-[0.95]">{d.titre}</p>
-            <p className={`mt-6 text-[0.95rem] leading-relaxed ${k === 0 ? "text-accent-ink/80" : "text-text-3"}`}>
+            <p className={`mt-6 text-[0.95rem] leading-relaxed ${k === 0 ? "text-accent-ink" : "text-text-3"}`}>
               {d.detail}
             </p>
           </li>
@@ -464,7 +464,7 @@ function Contact() {
         <h2 id="t-contact" className="display text-[clamp(3rem,7vw,6rem)] leading-[0.92]">
           Travaillons ensemble.
         </h2>
-        <p className="mt-6 max-w-[52ch] text-[1.0625rem] leading-relaxed text-accent-ink/80">
+        <p className="mt-6 max-w-[52ch] text-[1.0625rem] leading-relaxed text-accent-ink">
           Pour une candidature en master, un stage ou un projet : je réponds par e-mail et sur WhatsApp.
         </p>
 

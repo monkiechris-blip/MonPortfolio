@@ -10,8 +10,8 @@ colors:
   text: "#ECEEF2"
   text-2: "#C3C8D2"
   text-3: "#9AA1AF"
-  accent: "#FF8A3D"
-  accent-ink: "#13161D"
+  accent: "#4C8DFF"
+  accent-ink: "#0B0D12"
   ci-green: "#009E60"
 typography:
   display:
@@ -122,7 +122,7 @@ Un atelier d'ingénieur dans la nuit. Le travail réel apparaît en panneaux viv
 
 ## Colors
 
-Un fond nuit, des tuiles légèrement plus claires et des filets de 1px. Trois rôles de texte : `text`, `text-2`, `text-3` (≥ 5,7:1 sur les tuiles). Un seul accent, l'orange de la Côte d'Ivoire `#FF8A3D`, utilisé pour le mot « fiable », le bouton principal, le badge du 1er prix, la carte de distinction phare et le bloc contact final. Le vert `ci-green` ne sert qu'à la signature tricolore et à un bloc de l'emploi du temps.
+Un fond nuit, des tuiles légèrement plus claires et des filets de 1px. Trois rôles de texte : `text`, `text-2`, `text-3` (≥ 5,7:1 sur les tuiles). Un seul accent, le bleu électrique `#4C8DFF` (choisi par l'utilisateur à la place de l'orange), utilisé pour le mot « fiable », le bouton principal, le badge du 1er prix, la carte de distinction phare et le bloc contact final. Le drapeau tricolore (orange #F77F00, blanc, vert) ne sert que de petite signature ; le vert `ci-green` sert aussi à un bloc de l'emploi du temps.
 
 ## Typography
 
@@ -149,12 +149,12 @@ Rayons imbriqués de 6, 12, 16, 22 et 28px. Les cercles sont réservés aux avat
 
 - **Tuile** : fond `tile`, bordure `line`, rayon 22px ; la bordure s'éclaircit au survol.
 - **Aperçu SkillMap** : la requête se tape, puis les résultats s'affichent en décalé ; l'affichage est statique si l'utilisateur réduit les animations.
-- **Chronologie de parcours** : une tuile par expérience ; IMAKO a une bordure et des puces orange.
-- **Bloc contact final** : aplat orange, e-mail en grand, boutons sombres.
+- **Chronologie de parcours** : une tuile par expérience ; IMAKO a une bordure et des puces bleues.
+- **Bloc contact final** : aplat bleu, e-mail en grand, boutons sombres.
 
 ## Do's and Don'ts
 
 - À faire : faire porter la richesse par le contenu réel (aperçus, chiffres, faits), avec un seul accent.
 - À faire : animer avec `transform` et `opacity` uniquement, et toujours respecter la réduction des animations.
 - À éviter : les dégradés violets, les halos, les emoji, les glyphes Unicode comme icônes et les capitales espacées.
-- À éviter : un fond coloré sur toute la page ; l'orange reste un accent et un bloc final.
+- À éviter : un fond coloré sur toute la page ; le bleu reste un accent et un bloc final.
