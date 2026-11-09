@@ -24,9 +24,9 @@ export function Effets3D() {
       const scene = document.querySelector<HTMLElement>("[data-scene]");
       const tuiles = gsap.utils.toArray<HTMLElement>("[data-hero-tile]");
       const intro = document.querySelector<HTMLElement>("[data-hero-intro]");
-      if (!section || !scene || !intro || tuiles.length === 0) return;
-
-      // 1. L'assemblage : les tuiles quittent la profondeur et forment le bento.
+      // 1. L'assemblage (page d'accueil uniquement) : les tuiles quittent la profondeur et forment le bento.
+      let bouge: ((e: PointerEvent) => void) | null = null;
+      if (section && scene && intro && tuiles.length > 0) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -51,13 +51,14 @@ export function Effets3D() {
       // La scène suit légèrement la souris.
       const rx = gsap.quickTo(scene, "rotationX", { duration: 0.8, ease: "power3.out" });
       const ry = gsap.quickTo(scene, "rotationY", { duration: 0.8, ease: "power3.out" });
-      const bouge = (e: PointerEvent) => {
+      bouge = (e: PointerEvent) => {
         const nx = e.clientX / window.innerWidth - 0.5;
         const ny = e.clientY / window.innerHeight - 0.5;
         rx(-ny * 5);
         ry(nx * 7);
       };
       window.addEventListener("pointermove", bouge);
+      }
 
       // 2. Les panneaux suivants arrivent de la profondeur et se posent à plat.
       gsap.utils.toArray<HTMLElement>("[data-depth]").forEach((el) => {
@@ -110,7 +111,7 @@ export function Effets3D() {
       window.addEventListener("load", rafraichir);
 
       return () => {
-        window.removeEventListener("pointermove", bouge);
+        if (bouge) window.removeEventListener("pointermove", bouge);
         window.removeEventListener("load", rafraichir);
         nettoyages.forEach((n) => n());
       };

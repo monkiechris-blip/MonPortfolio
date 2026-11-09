@@ -4,7 +4,7 @@ import { Search, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
 // Aperçu illustratif : la recherche se tape, puis les résultats se filtrent.
-const scenes = [
+const scenesFr = [
   {
     requete: "Plombier qualifié · Cocody",
     filtres: ["Plomberie", "5 ans et +", "Note 4,5+"],
@@ -34,11 +34,52 @@ const scenes = [
   },
 ];
 
-export function SkillMapPreview({ lignes = 2, grand = false }: { lignes?: number; grand?: boolean }) {
+const scenesEn = [
+  {
+    requete: "Qualified plumber · Cocody",
+    filtres: ["Plumbing", "5+ years", "Rating 4.5+"],
+    resultats: [
+      { init: "KA", nom: "Koffi A.", meta: "Plumber · 8 yrs", note: "4.8", teinte: "#2B3A55" },
+      { init: "MT", nom: "Mariam T.", meta: "Plumber · 5 yrs", note: "4.7", teinte: "#3E2F4F" },
+      { init: "JB", nom: "Jean B.", meta: "Plumber · 12 yrs", note: "4.6", teinte: "#24453B" },
+    ],
+  },
+  {
+    requete: "Electrician · Riviera",
+    filtres: ["Electrical", "Available", "Rating 4.5+"],
+    resultats: [
+      { init: "AK", nom: "Awa K.", meta: "Electrician · 6 yrs", note: "4.9", teinte: "#24453B" },
+      { init: "YD", nom: "Yao D.", meta: "Electrician · 11 yrs", note: "4.7", teinte: "#2B3A55" },
+      { init: "SB", nom: "Sékou B.", meta: "Electrician · 4 yrs", note: "4.6", teinte: "#4A3A24" },
+    ],
+  },
+  {
+    requete: "Web developer · Plateau",
+    filtres: ["Digital", "3+ years", "Freelance"],
+    resultats: [
+      { init: "FN", nom: "Fatou N.", meta: "React developer · 4 yrs", note: "4.9", teinte: "#3E2F4F" },
+      { init: "IK", nom: "Ibrahim K.", meta: "PHP developer · 6 yrs", note: "4.6", teinte: "#2B3A55" },
+      { init: "CE", nom: "Claire E.", meta: "Front-end dev · 3 yrs", note: "4.5", teinte: "#24453B" },
+    ],
+  },
+];
+
+export function SkillMapPreview({
+  lignes = 2,
+  grand = false,
+  langue = "fr",
+}: {
+  lignes?: number;
+  grand?: boolean;
+  langue?: "fr" | "en";
+}) {
+  const scenes = langue === "en" ? scenesEn : scenesFr;
+  const contacter = langue === "en" ? "Contact" : "Contacter";
   const [i, setI] = useState(0);
   const [n, setN] = useState(scenes[0].requete.length);
 
   useEffect(() => {
+    const scenes = langue === "en" ? scenesEn : scenesFr;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let timer: ReturnType<typeof setTimeout>;
     let scene = 0;
@@ -62,7 +103,7 @@ export function SkillMapPreview({ lignes = 2, grand = false }: { lignes?: number
     };
     timer = setTimeout(suivante, 3200);
     return () => clearTimeout(timer);
-  }, []);
+  }, [langue]);
 
   const s = scenes[i];
   const pret = n >= s.requete.length;
@@ -113,7 +154,7 @@ export function SkillMapPreview({ lignes = 2, grand = false }: { lignes?: number
                 {r.note}
               </span>
             </span>
-            <span className="ml-auto rounded-lg bg-text px-2.5 py-1.5 text-xs font-semibold text-bg">Contacter</span>
+            <span className="ml-auto rounded-lg bg-text px-2.5 py-1.5 text-xs font-semibold text-bg">{contacter}</span>
           </li>
         ))}
       </ul>

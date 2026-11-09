@@ -23,21 +23,35 @@ export function MedMapPreview() {
   );
 }
 
-const jours = ["Lun", "Mar", "Mer", "Jeu", "Ven"];
-const cours = [
-  { j: 0, d: 0, h: 2, t: "Java avancé", a: true },
-  { j: 1, d: 1, h: 2, t: "Bases de données" },
-  { j: 2, d: 0, h: 1, t: "UML" },
-  { j: 3, d: 2, h: 2, t: "Projet web" },
-  { j: 4, d: 0, h: 2, t: "Examen SI", e: true },
-  { j: 2, d: 2, h: 1, t: "Anglais" },
+const textes = {
+  fr: {
+    titre: "Emploi du temps · L3",
+    jours: ["Lun", "Mar", "Mer", "Jeu", "Ven"],
+    cours: ["Java avancé", "Bases de données", "UML", "Projet web", "Examen SI", "Anglais"],
+  },
+  en: {
+    titre: "Timetable · Year 3",
+    jours: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    cours: ["Advanced Java", "Databases", "UML", "Web project", "IS exam", "English"],
+  },
+};
+const grille = [
+  { j: 0, d: 0, h: 2, a: true },
+  { j: 1, d: 1, h: 2 },
+  { j: 2, d: 0, h: 1 },
+  { j: 3, d: 2, h: 2 },
+  { j: 4, d: 0, h: 2, e: true },
+  { j: 2, d: 2, h: 1 },
 ];
 
-export function MyMiagePreview() {
+export function MyMiagePreview({ langue = "fr" }: { langue?: "fr" | "en" }) {
+  const t = textes[langue];
+  const jours = t.jours;
+  const cours = grille.map((g, k) => ({ ...g, t: t.cours[k] }));
   return (
     <div aria-hidden className="select-none rounded-xl border border-line-2 bg-bg p-3">
       <div className="mb-2 flex items-center justify-between text-xs text-text-3">
-        <span className="font-medium text-text-2">Emploi du temps · L3</span>
+        <span className="font-medium text-text-2">{t.titre}</span>
         <span className="mono">S1</span>
       </div>
       <div className="grid grid-cols-5 gap-1.5">
